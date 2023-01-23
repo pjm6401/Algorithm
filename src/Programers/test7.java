@@ -33,7 +33,6 @@ public class test7 {
         for(Integer key : listKeySet) {
             result[i] = key;
             i++;
-            System.out.println("key : " + key + " , " + "value : " + map.get(key));
         }
         System.out.println(map);
         System.out.println(Arrays.toString(result));
