@@ -4,7 +4,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int a =sc.nextInt();
-        int a =sc.nextInt();
-        int a =sc.nextInt();
+        int b =sc.nextInt();
+        int b =sc.nextInt();
+
+        int sum = (a+b+c);
+        int mean = (a+b+c)/3;
+
+        System.out.println();
+        System.out.println();
     }
 }
