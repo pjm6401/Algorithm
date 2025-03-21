@@ -3,6 +3,6 @@ public class Main {
         int a = 26;
         int b =5;
 
-        System.out.println(a*b);
+        System.out.println("26 * 5 ="+(a*b));
     }
 }
