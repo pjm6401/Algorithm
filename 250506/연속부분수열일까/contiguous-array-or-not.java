@@ -22,19 +22,20 @@ public class Main  {
             arrayN2[i] = Integer.parseInt(inputN2[i]);
         }
 
-        String flag = "Yes";
-        for(int i =0; i<n1;i++){
-
-            if(arrayN1[i] == arrayN2[0]){
-                for(int j = 0; j<n2;j++){
-                    if(arrayN2[j] != arrayN1[j+i]){
-                        flag = "No";
-                        break;
-                    }
+        String flag = "No";
+        for(int i =0; i<n1-n2;i++){
+            for(int j=0;j<n2;j++){
+                if(arrayN1[j+i] == arrayN2[j]){
+                    
+                    flag = "Yes";
+                }else{
+                    flag = "No";
+                    break;
                 }
-                break;
             }
-            
+            if(flag.equals("Yes")){
+                break;
+            }            
         }
         System.out.println(flag);
     }
