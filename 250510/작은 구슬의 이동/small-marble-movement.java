@@ -10,11 +10,11 @@ public class Main {
         String D = sc.next(); // 방향
 
         int direction = directionInteger(D);
-        int [] dx = {0,-1,1,0};
+        int [] dx = {0,1,-1,0};
         int [] dy = {1,0,0,-1};
 
         for (int i =0;i<T; i++){
-            if(!isBound(R+dx[direction],C+dy[direction])){
+            if(!isBound(N,R+dx[direction],C+dy[direction])){
                 direction = 3 - direction;
             }else{
                 R += dx[direction];
@@ -44,7 +44,7 @@ public class Main {
         }
         return direction;
     }
-    public static boolean isBound(int x ,int y){
-        return (x<=4 && x>=1 && y<=4 && y>=1);
+    public static boolean isBound(int N,int x ,int y){
+        return (x<=N && x>=1 && y<=N && y>=1);
     }
 }
