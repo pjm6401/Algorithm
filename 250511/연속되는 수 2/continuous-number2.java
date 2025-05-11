@@ -8,13 +8,11 @@ public class Main {
         int cnt = 0;
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            if(i>0 && arr[i-1] != arr[i]){
+            if(i == 0 || arr[i] != arr[i - 1])
                 cnt++;
-                if(i==n-1 && arr[n-1]!=arr[n-2]){
-                    cnt++;
-                }
-            }
         }
+
+        
         System.out.print(cnt);
         // Please write your code here.
     }
