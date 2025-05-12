@@ -20,7 +20,7 @@ public class Main {
             }
         }
 
-        if(max ==0){
+        if(max !=0){
             max = cnt;
         }
         System.out.println(max);
