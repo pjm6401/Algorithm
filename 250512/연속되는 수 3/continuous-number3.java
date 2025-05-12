@@ -22,6 +22,10 @@ public class Main {
                 cnt = 0;
             }
         }
+        
+        if(max == 0 ){
+            max = cnt+1;
+        }
 
         System.out.println(max);
     }
