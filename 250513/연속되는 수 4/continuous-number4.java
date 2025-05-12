@@ -10,7 +10,10 @@ public class Main {
         int cnt =0;
         int max =0;
 
-        for(int i =1; i<n; i++){
+        if(n==1){
+            cnt++;
+        }else{
+            for(int i =1; i<n; i++){
             if(isPlus(arr[i],arr[i-1])){
                 cnt++;
             }else{
@@ -19,8 +22,11 @@ public class Main {
                 }
             }
         }
+        }
 
-        if(max !=0){
+        
+
+        if(max ==0){
             max = cnt;
         }
         System.out.println(max);
