@@ -27,7 +27,9 @@ public class Main {
 
         
 
-        if(max ==0){
+        if(max ==0 && n!=1){
+            max = cnt+1;
+        }else{
             max = cnt;
         }
         System.out.println(max);
