@@ -14,20 +14,21 @@ public class Main {
             cnt++;
         }else{
             for(int i =1; i<n; i++){
-            if(isPlus(arr[i],arr[i-1])){
-                cnt++;
-            }else{
-                if(cnt>max){
-                    max = cnt;
+                if(isPlus(arr[i],arr[i-1])){
+                    cnt++;
+                }else{
+                    if(cnt+1>max){
+                        max = cnt+1;
+                    }
+                    cnt = 0;
                 }
             }
-        }
         }
 
         
 
         if(max ==0){
-            max = cnt;
+            max = cnt+1;
         }
         System.out.println(max);
     }
