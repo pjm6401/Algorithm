@@ -20,24 +20,35 @@ public class Main {
         List<Integer> aDistance = distanceList(A);
         List<Integer> bDistance = distanceList(B);
         String flag = null;
-        if(aDistance.get(0)>bDistance.get(0)){
-            flag = "A";
-        }
-        else if (aDistance.get(0)<bDistance.get(0)){
-            flag = "B";
-        }
-        for(int i =1; i<aDistance.size();i++){
-            
-            if(aDistance.get(i)>bDistance.get(i) && flag.equals("B")){
-                cnt ++;
+        int index = 0;
+        for(int i =0; i<aDistance.size();i++){
+            if(aDistance.get(0)>bDistance.get(0)){
                 flag = "A";
+                index = i+1;
+                break;
             }
-            else if(aDistance.get(i)<bDistance.get(i) && flag.equals("A")){
-                cnt ++;
+            else if (aDistance.get(0)<bDistance.get(0)){
                 flag = "B";
+                index = i+1;
+                break;
             }
         }
-       System.out.println(cnt);
+        if(flag != null){
+            for(int i =index; i<aDistance.size();i++){
+            
+                if(aDistance.get(i)>bDistance.get(i) && flag.equals("B")){
+                    cnt ++;
+                    flag = "A";
+                }
+                else if(aDistance.get(i)<bDistance.get(i) && flag.equals("A")){
+                    cnt ++;
+                    flag = "B";
+                }
+            }
+            System.out.println(cnt);
+        }else{
+            System.out.println(cnt);
+        }
     }
 
     public static List<Integer> distanceList(int [][] array){
