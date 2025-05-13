@@ -22,12 +22,12 @@ public class Main {
         String flag = null;
         int index = 0;
         for(int i =0; i<aDistance.size();i++){
-            if(aDistance.get(0)>bDistance.get(0)){
+            if(aDistance.get(i)>bDistance.get(i)){
                 flag = "A";
                 index = i+1;
                 break;
             }
-            else if (aDistance.get(0)<bDistance.get(0)){
+            else if (aDistance.get(i)<bDistance.get(i)){
                 flag = "B";
                 index = i+1;
                 break;
