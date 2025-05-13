@@ -43,19 +43,19 @@ public class Main {
             if(aList.size()<length && !(aList.size()>i)){
                 int target = aList.get(aList.size()-1);
 
-                if(bList.get(i) == target && location != target){
+                if(bList.get(i) == target && bList.get(i-1) != target){
                     cnt++;
                     location = target;
                 }
 
             }else if(bList.size()<length && !(bList.size()>i)){
                 int target = bList.get(bList.size()-1);
-                if(aList.get(i) == target && location != target){
+                if(aList.get(i) == target && aList.get(i-1) != target){
                     cnt++;
                     location = target;
                 } 
             }else{
-                if(aList.get(i) == bList.get(i) && location != aList.get(i)){
+                if(aList.get(i) == bList.get(i) && aList.get(i-1) != bList.get(i-1)){
                     cnt ++;
                     location = aList.get(i);
                 }
