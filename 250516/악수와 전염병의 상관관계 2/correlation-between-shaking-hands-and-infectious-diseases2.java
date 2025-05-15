@@ -3,15 +3,16 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt(); // 개발자 총 명수
-        int K = sc.nextInt(); // 전염병 전염 한계
-        int P = sc.nextInt(); // 처음 걸린 개발자의 번호
+        int N = sc.nextInt(); // 개발자 수
+        int K = sc.nextInt(); // 전염 가능 횟수
+        int P = sc.nextInt(); // 최초 감염자
         int T = sc.nextInt(); // 악수 횟수
 
-        int [] devInfection = new int [N];
-        int [] dev = new int [N];
-        devInfection [P-1] = K;
-        dev[P-1] = 1;
+        boolean[] infected = new boolean[N + 1];       // 감염 여부 (1번부터 사용)
+        int[] infectCount = new int[N + 1];            // 전염 가능 횟수
+
+        infected[P] = true;
+        infectCount[P] = K;
 
         int[][] shakes = new int[T][3];
         for (int i = 0; i < T; i++) {
@@ -22,38 +23,32 @@ public class Main {
 
         Arrays.sort(shakes, Comparator.comparingInt(a -> a[0]));
 
-        for(int i = 0; i<shakes.length; i++){
-            if(isInfection(shakes[i][1],shakes[i][2],dev) && canInfection(shakes[i][1],shakes[i][2],devInfection)){
+        for (int i = 0; i < T; i++) {
+            int time = shakes[i][0];
+            int a = shakes[i][1];
+            int b = shakes[i][2];
 
-                if(dev[shakes[i][1]-1] ==0){
-                    dev[shakes[i][1]-1] = 1;
-                    devInfection[shakes[i][1]-1] = 2;
-                    devInfection[shakes[i][2]-1] -=1;
-                }else if(dev[shakes[i][2]-1] ==0){
-                    dev[shakes[i][2]-1] = 1;
-                    devInfection[shakes[i][2]-1] = 2;
-                    devInfection[shakes[i][1]-1] -=1;
-                }else if (dev[shakes[i][1]-1] ==1 && dev[shakes[i][2]-1] ==1){
-                    devInfection[shakes[i][1]-1] -=1;
-                    devInfection[shakes[i][2]-1] -=1;
-                }
+            boolean aCanInfect = infected[a] && infectCount[a] > 0;
+            boolean bCanInfect = infected[b] && infectCount[b] > 0;
+
+            // 감염 여부 갱신
+            if (aCanInfect && !infected[b]) {
+                infected[b] = true;
+                infectCount[b] = K;
             }
+            if (bCanInfect && !infected[a]) {
+                infected[a] = true;
+                infectCount[a] = K;
+            }
+
+            // 감염자라면 전염 횟수 차감 (서로 감염자여도 각각 차감)
+            if (infected[a] && infectCount[a] > 0) infectCount[a]--;
+            if (infected[b] && infectCount[b] > 0) infectCount[b]--;
         }
 
-        for(int i =0; i<dev.length;i++){
-            System.out.print(dev[i]);
+        // 출력: 1이면 감염, 0이면 비감염
+        for (int i = 1; i <= N; i++) {
+            System.out.print(infected[i] ? "1" : "0");
         }
-    }
-
-    public static boolean isInfection(int dev1, int dev2, int [] dev){
-        if(dev[dev1-1] == 1 || dev[dev2-1] ==1) return true;
-
-        return false;
-    }
-
-    public static boolean canInfection(int dev1, int dev2, int[] devInfection){
-        if(devInfection[dev1-1] > 0 || devInfection[dev2-1] > 0 ) return true;
-
-        return false;
     }
 }
