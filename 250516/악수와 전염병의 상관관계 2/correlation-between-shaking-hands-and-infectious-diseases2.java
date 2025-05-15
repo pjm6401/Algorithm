@@ -12,7 +12,6 @@ public class Main {
         int[] infectCount = new int[N + 1];            // 전염 가능 횟수
 
         infected[P] = true;
-        infectCount[P] = K;
 
         int[][] shakes = new int[T][3];
         for (int i = 0; i < T; i++) {
@@ -28,22 +27,20 @@ public class Main {
             int a = shakes[i][1];
             int b = shakes[i][2];
 
-            boolean aCanInfect = infected[a] && infectCount[a] > 0;
-            boolean bCanInfect = infected[b] && infectCount[b] > 0;
+            if(infected[a]){
+                infectCount[a]++; 
+            }
 
-            // 감염 여부 갱신
-            if (aCanInfect && !infected[b]) {
+            if(infected[b]){
+                infectCount[b]++;
+            }
+            if(infectCount[a]<=K && infected[a]){
                 infected[b] = true;
-                infectCount[b] = K;
-            }
-            if (bCanInfect && !infected[a]) {
-                infected[a] = true;
-                infectCount[a] = K;
             }
 
-            // 감염자라면 전염 횟수 차감 (서로 감염자여도 각각 차감)
-            if (infected[a] && infectCount[a] > 0) infectCount[a]--;
-            if (infected[b] && infectCount[b] > 0) infectCount[b]--;
+            if(infectCount[b]<=K && infected[b]){
+                infected[a] = true;
+            }
         }
 
         // 출력: 1이면 감염, 0이면 비감염
