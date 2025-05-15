@@ -29,7 +29,7 @@ public class Main {
             
             points = nextPoint(x,y,direction,mirror);
             
-            if(!isEnd(n,points[0],points[1])){
+            if(!isInBounds(n,points[0],points[1])){
                 break;
             }
         }
@@ -43,36 +43,29 @@ public class Main {
         if(mirror == '/'){
             if(direction == 0){
                 direction = 3;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }else if(direction == 1){
                 direction = 2;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }else if(direction == 2){
                 direction = 1;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }else{
                 direction = 0;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }
         }else{
             if(direction == 0){
                 direction = 1;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }else if(direction == 1){
                 direction = 0;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }else if(direction == 2){
                 direction = 3;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }else{
                 direction = 2;
-                return new int[]{x+dx[direction],y+dy[direction],direction};
             }
         }
+        return new int[]{x+dx[direction],y+dy[direction],direction};
     }
 
 
-    public static boolean isEnd(int n,int x, int y){
+    public static boolean isInBounds(int n,int x, int y){
         return (x>=0 && x<n && y>=0 && y<n);
     } 
 
