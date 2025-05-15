@@ -16,9 +16,7 @@ public class Main {
             }
         }
         int startNum = sc.nextInt();
-        // Please write your code here.
 
-        
         int [] points = startPoint(n,startNum);
         boolean flag = true;
         int count = 0;
@@ -37,7 +35,7 @@ public class Main {
         }
         System.out.println(count);
     }
-    // 빛의 진행 방향을 나타냄 ex) D = 위에서 아래로
+
     public static int [] nextPoint(int x, int y, int direction, char mirror){
 
         int [] points = new int[3];
