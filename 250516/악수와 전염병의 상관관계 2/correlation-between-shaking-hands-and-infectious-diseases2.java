@@ -10,7 +10,7 @@ public class Main {
 
         int [] devInfection = new int [N];
         int [] dev = new int [N];
-        devInfection [P-1] = 2;
+        devInfection [P-1] = K;
         dev[P-1] = 1;
 
         int[][] shakes = new int[T][3];
@@ -33,7 +33,7 @@ public class Main {
                     dev[shakes[i][2]-1] = 1;
                     devInfection[shakes[i][2]-1] = 2;
                     devInfection[shakes[i][1]-1] -=1;
-                }else{
+                }else if (dev[shakes[i][1]-1] ==1 && dev[shakes[i][2]-1] ==1){
                     devInfection[shakes[i][1]-1] -=1;
                     devInfection[shakes[i][2]-1] -=1;
                 }
