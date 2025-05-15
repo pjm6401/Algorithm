@@ -57,5 +57,3 @@ public class Main {
         return false;
     }
 }
-
-$0
