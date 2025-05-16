@@ -26,7 +26,7 @@ public class Main {
             }
 
             rectangle[x][y] = charFlag;
-            if(charFlag<=95){
+            if(charFlag<95){
                 charFlag++;
             }else{
                 charFlag = 65;
