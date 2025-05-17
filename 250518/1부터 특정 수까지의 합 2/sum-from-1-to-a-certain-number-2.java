@@ -7,16 +7,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-         sum1(1, n);
+        System.out.println(sum1(n));
     }
 
-    public static void sum1(int i,int n){
-        if(i>n) {
-            System.out.println(sum);
-            return;
+    public static int sum1(int n){
+        if(n<=1) {
+            return 1;
         }
-        sum +=i;
-        i++;
-        sum1(i,n);
+        return n + sum1(n-1); 
     }
 }
