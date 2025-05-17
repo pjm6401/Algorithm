@@ -7,27 +7,26 @@ public class Main {
         int[] arr = new int[n];
         for (int i = 0; i < n; i++)
             arr[i] = sc.nextInt();
-        
-        System.out.println(result(n-1,arr));
+
+        System.out.println(result(n - 1, arr));
     }
 
-    public static int result (int n,int [] arr){
-        if(n==0){
+    // GCD 재귀
+    public static int gcd(int a, int b) {
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
+    }
+
+    // LCM 계산
+    public static int lcm(int a, int b) {
+        return a * b / gcd(a, b);
+    }
+
+    // 배열의 LCM을 재귀적으로 구함
+    public static int result(int n, int[] arr) {
+        if (n == 0)
             return arr[0];
-        }
-        if(n==1){
-            if(arr[n]%arr[n-1] ==0 || arr[n-1]%arr[n] ==0){
-                return Math.min(arr[n],arr[n-1]);
-            }else{
-                return arr[1] * arr[0];
-            }
-        }
-        
-        
-        if(arr[n]%arr[n-1] ==0 || arr[n-1]%arr[n] ==0){
-            return Math.min(arr[n],arr[n-1])* result(n-1,arr);
-        }else{
-            return arr[n-1]* result(n-1,arr);
-        }
+        return lcm(arr[n], result(n - 1, arr));
     }
 }
