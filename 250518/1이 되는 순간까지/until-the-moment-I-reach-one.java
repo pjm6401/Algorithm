@@ -6,20 +6,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        result(n);
+        System.out.print(result(n)); 
     }
 
-    public static void result(int n){
+    public static int result(int n){
         if(n==1){
-            System.out.print(count);
-            return;
+            return 0;
         }
         if(n%2 == 0){
-            count++;
-            result(n/2);
+            
+            return result(n/2)+1;
         }else{
             count++;
-            result(n/3);
+            return result(n/3)+1;
         }
     }
 }
