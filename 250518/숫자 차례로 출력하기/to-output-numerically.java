@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        print3 (1,n);
+        print4 (n);
         System.out.println();
         print2 (n);
         
@@ -23,6 +23,14 @@ public class Main {
 
         System.out.print(n+" ");
         print2(n-1);
+    }
+
+    public static void print4(int n){
+        
+        if(n==0)return;
+        print4(n-1);
+        System.out.print(n+" ");
+        
     }
 
     public static void print3(int i,int n){
