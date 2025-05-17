@@ -15,6 +15,13 @@ public class Main {
         if(n==0){
             return arr[0];
         }
+        if(n==1){
+            if(arr[n]%arr[n-1] ==0 || arr[n-1]%arr[n] ==0){
+                return Math.min(arr[n],arr[n-1]);
+            }else{
+                return arr[1] * arr[0];
+            }
+        }
         
         
         if(arr[n]%arr[n-1] ==0 || arr[n-1]%arr[n] ==0){
