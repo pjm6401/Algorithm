@@ -6,19 +6,29 @@ public class Main {
         int k = sc.nextInt();
         String t = sc.next();
         String[] words = new String[n];
+        
         for (int i = 0; i < n; i++) {
-
-            String word = sc.next();
-
-            if(word.contains(t)){
-                words[i] = word;
-            }else{
-                words[i] = "N";
+            words[i] = sc.next();
+        }
+        int index = 0 ;
+        for (int i = 0; i < n; i++) {
+            if(words[i].contains(t)){
+                index++;
             }
         }
-        Arrays.sort(words);
 
-        System.out.println(words[k-1]);
+        String[] wordString = new String [index];
+        index = 0;
+
+        for (int i = 0; i < n; i++) {
+            if(words[i].contains(t)){
+                wordString[index] = words[i];
+                index++;
+            }
+        }
+        Arrays.sort(wordString);
+
+        System.out.println(wordString[k-1]);
         // Please write your code here.
     }
 }
