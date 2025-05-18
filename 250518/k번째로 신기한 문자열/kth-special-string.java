@@ -12,6 +12,8 @@ public class Main {
 
             if(word.contains(t)){
                 words[i] = word;
+            }else{
+                words[i] = "N";
             }
         }
         Arrays.sort(words);
