@@ -1,6 +1,6 @@
-import java.util.Scanner;
+import java.util.*;
 
-class Student impliments Comparable<Student>{
+class Student implements Comparable<Student>{
     private String name;
     private int kor;
     private int eng;
@@ -13,15 +13,27 @@ class Student impliments Comparable<Student>{
         this.math = math;
     }
 
-    @Overide
+    @Override
     public int compareTo(Student student){
-        if(this.kor == kor){
-            if(this.eng == eng){
-                return math - this.math;
-            }
-            return eng - this.eng;
+        if(this.kor == student.kor){
+            if(this.eng == student.eng) return student.math - this.math;
+            return student.eng - this.eng;
         }
-        return kor - this.kor;
+        return student.kor - this.kor;
+    }
+
+    public void print(){
+        System.out.println(name + " "+kor + " "+eng + " "+math);
+    }
+
+    public int getKor(){
+        return this.kor;
+    }
+    public int getEng(){
+        return this.eng;
+    }
+    public int getMath(){
+        return this.math;
     }
 }
 
@@ -34,9 +46,14 @@ public class Main {
         for (int i = 0; i < n; i++) {
             String name = sc.next();
             int kor = sc.nextInt();
-            int kor = sc.nextInt();
-            students[i] = new Student()
+            int eng = sc.nextInt();
+            int math = sc.nextInt();
+            students[i] = new Student(name,kor,eng,math);
         }
-        // Please write your code here.
+
+        Arrays.sort(students);
+        for(int i = 0; i < n; i++){
+            students[i].print();
+        }
     }
 }
