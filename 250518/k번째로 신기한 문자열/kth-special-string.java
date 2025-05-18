@@ -21,13 +21,12 @@ public class Main {
         index = 0;
 
         for (int i = 0; i < n; i++) {
-            if(words[i].contains(t)){
+            if(words[i].contains(t)&& !words[i].contains(" ")){
                 wordString[index] = words[i];
                 index++;
             }
         }
         Arrays.sort(wordString);
-
         System.out.println(wordString[k-1]);
         // Please write your code here.
     }
