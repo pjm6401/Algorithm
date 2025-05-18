@@ -46,9 +46,9 @@ public class Main {
 
         // Custom Comparator를 활용한 정렬:
         Arrays.sort(numbers);
-        for(int i = 0; i < n; i++) {System.out.print(numbers[i].getIndex()+" ");
+        for(int i = 0; i < n; i++) 
             answer[numbers[i].getIndex()] = i + 1; // 인덱스 보정
-        }
+        
         // 출력:
         for(int i = 0; i < n; i++){
            System.out.print(answer[i] + " ");
