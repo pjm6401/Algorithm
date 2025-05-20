@@ -8,6 +8,23 @@ public class Main {
         }
         Arrays.sort(arr);
 
-        System.out.println(arr[0]+" "+ arr[1] + " "+ arr[2]);
+        int A = arr[0];
+        int B = 0;
+        int C = 0;
+        int ABC = arr[6];
+        int BC = ABC-A;
+        boolean flag = false;
+        for(int i = 1; i<6; i++){
+            for(int j = 2; j<7; j++)
+                if(arr[i]+arr[j] == BC){
+                    B = arr[i];
+                    C = arr[j];
+                    flag = true;
+                    break;
+            }
+            if(flag) break;
+        }
+        
+        System.out.println(A+" "+ B + " "+ C);
     }
 }
