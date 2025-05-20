@@ -1,41 +1,47 @@
 import java.util.*;
-
-class Segment {
-        int start, end;
-        Segment(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
 public class Main {
-      public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
+        int n = sc.nextInt();
+        int [] x1 = new int [n];
+        int [] x2 = new int [n];
 
-        Segment[] segments = new Segment[N];
-        for (int i = 0; i < N; i++) {
-            int x1 = sc.nextInt();
-            int x2 = sc.nextInt();
-            segments[i] = new Segment(x1, x2);
-        }
+        int min = 100;
+        int max = 0;
+        int minIndex = 0;
+        int maxIndex = 0;
+        int length = 100;
+        for (int i = 0; i < n; i++) {
+            x1[i] = sc.nextInt();
+            x2[i] = sc.nextInt();
 
-        int minLength = Integer.MAX_VALUE;
-
-        for (int i = 0; i < N; i++) {
-            int minStart = Integer.MAX_VALUE;
-            int maxEnd = Integer.MIN_VALUE;
-
-            for (int j = 0; j < N; j++) {
-                if (i == j) continue; // i번째 선분은 제거
-                minStart = Math.min(minStart, segments[j].start);
-                maxEnd = Math.max(maxEnd, segments[j].end);
+            if(min>x1[i]){
+                min = x1[i];
+                minIndex = i;
             }
 
-            int length = maxEnd - minStart;
-            minLength = Math.min(minLength, length);
+            if(max<x2[i]){
+                max = x2[i];
+                maxIndex = i;
+            }
         }
+        min = 100;
+        max = 0;
+        for(int i = 0 ; i<n;i++){
+            if(i==minIndex) continue;
 
-        System.out.println(minLength);
+            if(x1[i]<min) min = x1[i];
+            if(x2[i]>max) max = x2[i];
+        }
+        length = Math.min(length,max-min);
+        min = 100;
+        max = 0;
+        for(int i = 0 ; i<n;i++){
+            if(i==maxIndex) continue;
+            if(x1[i]<min) min = x1[i];
+            if(x2[i]>max) max = x2[i];
+        }
+        length = Math.min(length,max-min);
+        System.out.println(length);
     }
 }
