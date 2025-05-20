@@ -20,7 +20,7 @@ public class Main {
                 count++;
             }
         }
-        System.out.println(count+1);
+        System.out.println(count);
 
     }
 
@@ -31,6 +31,6 @@ public class Main {
             day+=month[i];
         }
 
-        return day;
+        return day+d;
     }
 }
