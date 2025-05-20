@@ -5,21 +5,15 @@ public class Main {
         int A = sc.nextInt();
         int B = sc.nextInt();
         int C = sc.nextInt();
-        
-        if(isInBound(A,B,C)){
-            int startMin = (11*24*60)+(11*60)+11;
-            int endMin = (A*24*60)+(B*60)+C;
-
-            System.out.println(endMin-startMin);
-        }else{
+        int startMin = (11*24*60)+(11*60)+11;
+        int endMin = (A*24*60)+(B*60)+C;
+        if(endMin - startMin <0){
             System.out.println(-1);
+        }else{
+            System.out.println(endMin-startMin);
         }
         
 
     }
 
-    public static boolean isInBound(int A, int B, int C){
-        return ((A>=11) || (A==11 && B>=11) || (A==11 && B==11 && C>=11));
-
-    }
 }
