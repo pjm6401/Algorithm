@@ -8,20 +8,18 @@ public class Main {
         int d1 = sc.nextInt();
         int m2 = sc.nextInt();
         int d2 = sc.nextInt();
-        int days = 0;
-        for(int i=m1+1;i<m2;i++){
-            days+=month[i];
-        }
-        int startDay = 1;
-        int endDay = 0;
 
-        if(m1-m2!=0) {
-            startDay += month[m1] - d1;
-            endDay += d2;
-            System.out.println(days+startDay+endDay);
-        }else{
-            System.out.println(d2-d1+1);
+        System.out.println(days(m2,d2)-days(m1,d1));       
+    }
+
+    public static int days(int m, int d){
+        if(m==1){
+            return d;
         }
-        
+        int days = 0;
+        for(int i =1; i<=m; i++){
+            days += month[i];
+        }
+        return days+d;
     }
 }
