@@ -18,7 +18,10 @@ public class Main {
         if(m1-m2!=0) {
             startDay += month[m1] - d1;
             endDay += d2;
+            System.out.println(days+startDay+endDay);
+        }else{
+            System.out.println(d2-d1+1);
         }
-        System.out.println(days+startDay+endDay);
+        
     }
 }
