@@ -13,7 +13,9 @@ public class Main {
             days+=month[i];
         }
         int startDay = month[m1] - d1 +1;
-        int endDay = d2;
+        int endDay = 0;
+
+        if(m1-m2!=0) endDay = d2;
         System.out.println(days+startDay+endDay);
     }
 }
