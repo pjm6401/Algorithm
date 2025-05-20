@@ -12,10 +12,13 @@ public class Main {
         for(int i=m1+1;i<m2;i++){
             days+=month[i];
         }
-        int startDay = month[m1] - d1 +1;
+        int startDay = 1;
         int endDay = 0;
 
-        if(m1-m2!=0) endDay = d2;
+        if(m1-m2!=0) {
+            startDay += month[m1] - d1;
+            endDay += d2;
+        }
         System.out.println(days+startDay+endDay);
     }
 }
