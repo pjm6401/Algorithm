@@ -19,7 +19,7 @@ public class Main {
     }
 
     public static boolean isInBound(int A, int B, int C){
-        return (A>=11 && B>=11 && C>=11);
+        return ((A>=11) || (A==11 && B>=11) || (A==11 && B==11 && C>=11));
 
     }
 }
