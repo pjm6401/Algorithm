@@ -9,7 +9,7 @@ public class Main {
         int m2 = sc.nextInt();
         int d2 = sc.nextInt();
 
-        System.out.println(days(m2,d2)-days(m1,d1));       
+        System.out.println(days(m2,d2)-days(m1,d1)+1);       
     }
 
     public static int days(int m, int d){
@@ -17,7 +17,7 @@ public class Main {
             return d;
         }
         int days = 0;
-        for(int i =1; i<=m; i++){
+        for(int i =1; i<m; i++){
             days += month[i];
         }
         return days+d;
