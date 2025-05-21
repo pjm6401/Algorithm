@@ -30,7 +30,8 @@ public class Main {
         int offset = -min; // 음수 인덱스 방지
         int size = max - min + 1;
         int[] tiles = new int[size]; // 0 = 회색, 1 = 검정, -1 = 흰색
-        int[] tilesCount = new int[size];
+        int[] tilesCountBlack = new int[size];
+        int[] tilesCountWhite = new int[size];
         // 2. 실제 명령 수행
         int curr = offset;
         for (int i = 0; i < N; i++) {
@@ -40,13 +41,13 @@ public class Main {
             if (dir == 'R') {
                 for (int j = 0; j < x; j++) {
                     tiles[curr + j] = 1; // 검정색
-                    tilesCount[curr + j]++;
+                    tilesCountBlack[curr + j]+=1;
                 }
                 curr = curr + x - 1; // 마지막 위치로 이동
             } else {
                 for (int j = 0; j < x; j++) {
                     tiles[curr - j] = -1; // 흰색
-                    tilesCount[curr - j]++;
+                    tilesCountWhite[curr - j]+=1;
                 }
                 curr = curr - x + 1; // 마지막 위치로 이동
             }
@@ -57,9 +58,9 @@ public class Main {
         int black = 0;
         int gray = 0;
         for (int i = 0; i< size; i++) {
-            if (tiles[i] == -1 && tilesCount[i]<4) white++;
-            else if (tiles[i] == 1 && tilesCount[i]<4) black++;
-            else if (tilesCount[i]>=4) gray++;
+            if (tiles[i] == -1 && (tilesCountBlack[i]<2 || tilesCountWhite[i]<2 )) white++;
+            else if (tiles[i] == 1 && (tilesCountBlack[i]<2 || tilesCountWhite[i]<2 )) black++;
+            else if (tilesCountBlack[i]>=2 && tilesCountWhite[i]>=2) gray++;
         }
 
         System.out.println(white + " " + black+" "+gray);
