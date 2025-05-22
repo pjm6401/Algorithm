@@ -2,35 +2,26 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int R = sc.nextInt();
-        int C = sc.nextInt();
-        char[][] grid = new char[R][C];
-        for (int i = 0; i < R; i++) {
-            for (int j = 0; j < C; j++) {
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        char[][] grid = new char[n][m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 grid[i][j] = sc.next().charAt(0);
             }
         }
         int count = 0;
-        char start = grid[0][0];
-        for (int i = 1; i < R; i++) {
-            for (int j = 1; j < C; j++) {
-                if(start != grid[i][j]){
-                    for(int k=i+1;k<R;k++){
-                        for(int l=j+1;l<C;l++){
-                            if(start == grid[k][l]){
-                                for(int n = k+1; n<R; n++){
-                                    for(int m = l+1; m<C; m++){
-                                        if(start != grid[n][m] && n == R-1 && m == C-1){
-                                            count++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
+        for(int i = 1; i < n-2; i++)
+            for(int j = 1; j < m-2; j++)
+                for(int k = i + 1; k < n - 1; k++)
+                    for(int l = j + 1; l < m - 1; l++)
+                        // 그 중 색깔이 전부 달라지는 경우에만 개수를 세줍니다.
+                        if(grid[0][0] != grid[i][j] && 
+                           grid[i][j] != grid[k][l] &&
+                           grid[k][l] != grid[n - 1][m - 1])
+                            count++;
+        
         System.out.println(count);
     }
 }
