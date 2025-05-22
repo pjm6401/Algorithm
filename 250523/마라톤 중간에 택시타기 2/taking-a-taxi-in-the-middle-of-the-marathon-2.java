@@ -13,24 +13,21 @@ public class Main {
             x[i] = sc.nextInt();
             y[i] = sc.nextInt();
         }
-        int index = 1;
-        int distance = 0;
-        int xPoint = x[0];
-        int yPoint = y[0];
-        for (int i = 0; i < n; i++) {
-            for(int j = 0; j<n;j++){
-                if(j==index) continue;
+
+
+        for (int i = 1; i < n-1; i++) {
+            int xPoint = x[0];
+            int yPoint = y[0];
+            int distance = 0;
+            for(int j = 1; j<n;j++){
+                if(j==i) continue;
                 int distanceX = Math.abs(xPoint-x[j]);
                 int distanceY = Math.abs(yPoint-y[j]);
                 distance = distance + distanceX + distanceY;
                 xPoint = x[j];
                 yPoint = y[j];
             }   
-            index++;
             min = Math.min(min,distance);
-            xPoint = x[0];
-            yPoint = y[0];
-            distance = 0;
         }
         System.out.println(min);
     }
