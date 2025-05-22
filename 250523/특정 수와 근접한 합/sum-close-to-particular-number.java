@@ -8,11 +8,9 @@ public class Main {
         int n = sc.nextInt();
         int s = sc.nextInt();
         int[] a = new int[n];
+        int total = 0;
         for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
-        }
-        int total = 0;
-        for (int i = 0; i < n; i++){
             total += a[i];
         }
 
