@@ -17,8 +17,8 @@ public class Main {
         int distance = 0;
         int xPoint = x[0];
         int yPoint = y[0];
-        for (int i = 1; i < n-1; i++) {
-            for(int j = 1; j<n;j++){
+        for (int i = 0; i < n; i++) {
+            for(int j = 0; j<n;j++){
                 if(j==index) continue;
                 int distanceX = Math.abs(xPoint-x[j]);
                 int distanceY = Math.abs(yPoint-y[j]);
@@ -30,6 +30,7 @@ public class Main {
             min = Math.min(min,distance);
             xPoint = x[0];
             yPoint = y[0];
+            distance = 0;
         }
         System.out.println(min);
     }
