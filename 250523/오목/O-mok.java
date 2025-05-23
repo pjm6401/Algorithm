@@ -13,8 +13,8 @@ public class Main {
         int color = 0;
         int x = 0;
         int y = 0;
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 15; j++) {
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 19; j++) {
                 if(isFive(i,j,arr) >= 0){
                     int direction = isFive(i,j,arr);
                     color = arr[i][j];
@@ -31,14 +31,14 @@ public class Main {
     }
 
     public static int isFive(int i, int j, int[][] arr){
-        if(isSame(arr[i][j],arr[i][j+1],arr[i][j+2],arr[i][j+3],arr[i][j+4])){
+        if(j<15 && isSame(arr[i][j],arr[i][j+1],arr[i][j+2],arr[i][j+3],arr[i][j+4])){
             return 0; // 가로방향 0
-        }else if (isSame(arr[i][j],arr[i+1][j+1],arr[i+2][j+2],arr[i+3][j+3],arr[i+4][j+4])){
+        }else if (j<15 && i< 15 && isSame(arr[i][j],arr[i+1][j+1],arr[i+2][j+2],arr[i+3][j+3],arr[i+4][j+4])){
             return 1; // 대각방향 1
-        }else if (isSame(arr[i][j],arr[i+1][j],arr[i+2][j],arr[i+3][j],arr[i+4][j])) {
+        }else if (i<15 && isSame(arr[i][j],arr[i+1][j],arr[i+2][j],arr[i+3][j],arr[i+4][j])) {
             return 2; // 세로방향 2
-        }else if (j>=4 && isSame(arr[i][j],arr[i+1][j-1],arr[i+2][j-2],arr[i+3][j-3],arr[i+4][j-4]))
-            return 3;
+        }else if (j>=4 && i< 15 && isSame(arr[i][j],arr[i+1][j-1],arr[i+2][j-2],arr[i+3][j-3],arr[i+4][j-4]))
+            return 3; // 대각방향 3
         else{
             return -1;
         }
