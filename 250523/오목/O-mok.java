@@ -37,7 +37,9 @@ public class Main {
             return 1; // 대각방향 1
         }else if (isSame(arr[i][j],arr[i+1][j],arr[i+2][j],arr[i+3][j],arr[i+4][j])) {
             return 2; // 세로방향 2
-        }else{
+        }else if (j>=4 && isSame(arr[i][j],arr[i+1][j-1],arr[i+2][j-2],arr[i+3][j-3],arr[i+4][j-4]))
+            return 3;
+        else{
             return -1;
         }
     }
@@ -64,6 +66,8 @@ public class Main {
 
         if(direction == 0 || direction == 1){
             idx = 3;
+        }else if(direction == 3){
+            idx = -1;
         }else{
             idx = 1;
         }
