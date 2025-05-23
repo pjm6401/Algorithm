@@ -33,9 +33,9 @@ public class Main {
     public static int isFive(int i, int j, int[][] arr){
         if(isSame(arr[i][j],arr[i][j+1],arr[i][j+2],arr[i][j+3],arr[i][j+4])){
             return 0; // 가로방향 0
-        }else if (isSame(arr[i][j],arr[i+1][j],arr[i+2][j],arr[i+3][j],arr[i+4][j])){
+        }else if (isSame(arr[i][j],arr[i+1][j+1],arr[i+2][j+2],arr[i+3][j+3],arr[i+4][j+4])){
             return 1; // 대각방향 1
-        }else if (isSame(arr[i][j],arr[i+1][j+1],arr[i+2][j+2],arr[i+3][j+3],arr[i+4][j+4])) {
+        }else if (isSame(arr[i][j],arr[i+1][j],arr[i+2][j],arr[i+3][j],arr[i+4][j])) {
             return 2; // 세로방향 2
         }else{
             return -1;
