@@ -14,8 +14,8 @@ public class Main {
         int min = sum;
         
         for(int i =0; i<4; i++){
-            for(int j =1; j<5; j++){
-                for(int k = 2; k<6; k++){
+            for(int j =i+1; j<5; j++){
+                for(int k = j+1; k<6; k++){
                     int sum1 = ability[i]+ability[j]+ability[k];
                     int sum2 = sum - sum1;
 
