@@ -31,7 +31,7 @@ public class Main {
             System.out.println(0);
             return;
         }
-
+        int [] arr = new int [101];
         for(int i = 0; i < n; i++) {
             int x = sc.nextInt();
             char c = sc.next().charAt(0);
@@ -43,8 +43,8 @@ public class Main {
         }
 
         int maxLen = 0;
-        for(int i = 0; i <= MAX_NUM; i++) {
-            for(int j = i + 1; j <= MAX_NUM; j++) {
+        for(int i = 0; i <= 100; i++) {
+            for(int j = i + 1; j <= 100; j++) {
                 if(arr[i] == 0 || arr[j] == 0)
                     continue;
                 
