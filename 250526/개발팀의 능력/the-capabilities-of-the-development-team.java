@@ -12,27 +12,31 @@ public class Main {
             arr[i] = sc.nextInt();
             sum+=arr[i];
         }
-        int min = 5000;
+        int min = 5001;
         for(int i = 0; i<4; i++){
-            for(int j=i; j<5; j++){
+            for(int j=i+1; j<5; j++){
                 min = Math.min(min,diff(i,j));
             }
         }
-
+        if(min == 5001) min = -1;
         System.out.println(min);
     }
 
     public static int diff(int i, int j){
         int sum1 = arr[i]+arr[j];
         int sumTmp = sum - sum1;
-        int max = 0;
-        int min = 1001;
+        int abilityDiff = 5001;
         for(int k =0; k < 5; k++){
             if(k==i||k==j) continue;
-            max = Math.max(sum1,Math.max(arr[k],sumTmp-arr[k]));
-            min = Math.min(sum1,Math.min(arr[k],sumTmp-arr[k]));
+            int sum2 = sumTmp - arr[k];   
+            int sum3 = arr[k];            
+
+            int max = Math.max(sum1, Math.max(sum2, sum3));
+            int min = Math.min(sum1, Math.min(sum2, sum3));
+            if(sum1 == sum2 || sum2 == sum3 || sum1==sum3) break;
+            abilityDiff = Math.min(abilityDiff, max - min);
         }
         
-        return max - min;
+        return abilityDiff;
     }
 }
