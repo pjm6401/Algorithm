@@ -16,18 +16,16 @@ public class Main {
         int max = 0;
         
         
-            for (int i = k; i < 101;i++){
-             
+        for(int i = 0; i < 101; i++) {
             int sum = 0;
-            for(int j = i-k; j<=i+k;j++) {
-                if(j>=0 && j<=100) sum += basket[j];
-                
-            }
+            for(int j = i - k; j <= i + k; j++)
+                if(j >= 0 && j <= 100)
+                    sum += basket[j];
+            
 
-
-            max = Math.max (max,sum);
-            }
-            System.out.println(max);
+            max = Math.max(max, sum);
+        }
+        System.out.println(max);
         
     }
 }
