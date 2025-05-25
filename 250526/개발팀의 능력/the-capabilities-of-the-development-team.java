@@ -33,7 +33,7 @@ public class Main {
 
             int max = Math.max(sum1, Math.max(sum2, sum3));
             int min = Math.min(sum1, Math.min(sum2, sum3));
-            if(sum1 == sum2 || sum2 == sum3 || sum1==sum3) break;
+            if(sum1 == sum2 || sum2 == sum3 || sum1==sum3) continue;
             abilityDiff = Math.min(abilityDiff, max - min);
         }
         
