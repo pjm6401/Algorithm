@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -9,6 +9,7 @@ public class Main {
             p[i] = sc.nextInt();
         }
         int max = 0;
+        Arrays.sort(p);
         for(int i =0; i<n;i++){
             int sum = b;
             int cnt = 0;
