@@ -1,41 +1,31 @@
-import java.util.*;
-
+import java.util.Scanner;
 public class Main {
-    static class Segment {
-        int x1, x2;
-
-        Segment(int x1, int x2) {
-            this.x1 = x1;
-            this.x2 = x2;
-        }
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Segment[] segments = new Segment[n];
-
+        int[] x1 = new int[n];
+        int[] x2 = new int[n];
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
         for (int i = 0; i < n; i++) {
-            int x1 = sc.nextInt();
-            int x2 = sc.nextInt();
-            segments[i] = new Segment(x1, x2);
+            x1[i] = sc.nextInt();
+            x2[i] = sc.nextInt();
         }
+       
+        int count = 0; 
+        for(int i =0; i<n; i++){
+            boolean flag = true;
+            for(int j = 0; j<n; j++){
+                if(i==j)continue;
 
-        int count = 0;
-
-        for (int i = 0; i < n; i++) {
-            boolean intersects = false;
-            for (int j = 0; j < n; j++) {
-                if (i == j) continue;
-                if ((segments[i].x1 < segments[j].x1 && segments[i].x2 > segments[j].x2) ||
-                    (segments[i].x1 > segments[j].x1 && segments[i].x2 < segments[j].x2)) {
-                    intersects = true;
-                    break;
-                }
+                if((x1[i]<=x1[j] && x2[i]>=x2[j]) || 
+                    (x1[i]>=x1[j] && x2[i]<=x2[j])){
+                        flag = false;
+                        break;
+                    }
             }
-            if (!intersects) count++;
+            if(flag) count++;
         }
-
         System.out.println(count);
     }
 }
