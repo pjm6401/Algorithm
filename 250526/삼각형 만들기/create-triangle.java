@@ -25,7 +25,7 @@ public class Main {
                             minY = Math.min(minY,Math.min(y[i],Math.min(y[j],y[k])));
                             maxY = Math.max(maxY,Math.max(y[i],Math.max(y[j],y[k])));
 
-                            int length = maxX-minY;
+                            int length = maxX-minX;
                             int heigth = maxY-minY;
 
                             max = Math.max(max,length*heigth);
