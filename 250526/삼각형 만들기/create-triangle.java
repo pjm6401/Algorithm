@@ -13,8 +13,8 @@ public class Main {
         for(int i = 0; i<n-2;i++){
             for(int j = i+1; j<n-1; j++){
                 for(int k = j+1; k<n; k++){
-                    if(y[i] - y[j] == 0 || y[j]-y[k] == 0 || y[k]-y[i] ==0 &&
-                        x[i] - x[j] == 0 || x[j]-y[k] == 0 || x[k]-y[i] ==0 ){
+                    if((y[i] - y[j] == 0 || y[j]-y[k] == 0 || y[k]-y[i] ==0) &&
+                        (x[i] - x[j] == 0 || x[j]-x[k] == 0 || x[k]-x[i] ==0 )){
                             int minX = Integer.MAX_VALUE;
                             int minY = Integer.MAX_VALUE;
                             int maxX = Integer.MIN_VALUE;
