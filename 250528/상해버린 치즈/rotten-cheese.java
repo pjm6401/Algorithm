@@ -1,6 +1,6 @@
-import java.util.Scanner;
+import java.util.*;
 
-class Eat{
+class Eat implements Comparable<Eat>{
     int person;
     int cheeze;
     int second;
@@ -9,6 +9,10 @@ class Eat{
         this.person = person;
         this.cheeze = cheeze;
         this.second = second;
+    }
+
+    public int compareTo(Eat e){
+        return this.person - e.person;
     }
 }
 
@@ -49,7 +53,7 @@ public class Main {
             hurts[i] = new Hurt(p,t);
         }
         int max = 0;
-
+        Arrays.sort(eats);
         for(int i = 0; i < S; i++){
             int hurtPerson = hurts[i].person;
             int hurtTime = hurts[i].second;
@@ -57,10 +61,12 @@ public class Main {
                 int count = 0;
                 if(hurtPerson == eats[j].person && hurtTime>eats[j].second){
                     int cheeze = eats[j].cheeze;
+                    int cheaker = 0;
                     for(int l = 0; l<D; l++){
                         
-                        if(cheeze == eats[l].cheeze){
+                        if(cheeze == eats[l].cheeze && cheaker != eats[l].person){
                             count ++;
+                            cheaker = eats[l].person;
                         }
                         
                     }
