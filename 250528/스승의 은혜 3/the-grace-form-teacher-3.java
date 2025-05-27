@@ -12,6 +12,8 @@ class WishList implements Comparable<WishList>{
     }
 
     public int compareTo(WishList w){
+        if( this.ps == w.ps)
+            return (this.p/2 + this.s) - (w.p/2 + w.s);
         return this.ps -w.ps;
     }
 }
@@ -35,13 +37,13 @@ public class Main {
             int count = 0;
             for(int j = 0; j<n; j++){
                 if(i == j){
-                    sum -=wishLists[j].p/2 + wishLists[j].s;
+                    sum -=((wishLists[j].ps-wishLists[j].s)/2 + wishLists[j].s);
                 }else{
                     sum -=wishLists[j].ps;
                 }
-
                 if(sum>=0){
                     count ++;
+                    
                 }else{
                     break;
                 }
