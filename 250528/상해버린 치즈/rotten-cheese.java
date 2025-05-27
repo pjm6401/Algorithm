@@ -1,80 +1,84 @@
 import java.util.*;
 
-class Eat implements Comparable<Eat>{
+class Eat {
     int person;
-    int cheeze;
-    int second;
+    int cheese;
+    int time;
 
-    public Eat(int person, int cheeze, int second){
+    public Eat(int person, int cheese, int time) {
         this.person = person;
-        this.cheeze = cheeze;
-        this.second = second;
-    }
-
-    public int compareTo(Eat e){
-        return this.person - e.person;
+        this.cheese = cheese;
+        this.time = time;
     }
 }
 
-class Hurt{
+class Hurt {
     int person;
-    int second;
+    int time;
 
-    public Hurt(int person,int second){
+    public Hurt(int person, int time) {
         this.person = person;
-        this.second = second;
+        this.time = time;
     }
-
-
 }
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        int M = sc.nextInt();
-        int D = sc.nextInt();
-        int S = sc.nextInt();
 
-        Eat [] eats = new Eat[D];
-        Hurt [] hurts = new Hurt[S];
+        int N = sc.nextInt(); // 사람 수
+        int M = sc.nextInt(); // 치즈 수
+        int D = sc.nextInt(); // 먹은 기록 수
+        int S = sc.nextInt(); // 아픈 기록 수
 
+        Eat[] eats = new Eat[D];
         for (int i = 0; i < D; i++) {
-            int p = sc.nextInt();
-            int m = sc.nextInt();
-            int t = sc.nextInt();
-
-            eats[i] = new Eat(p,m,t);
+            eats[i] = new Eat(sc.nextInt(), sc.nextInt(), sc.nextInt());
         }
+
+        Hurt[] hurts = new Hurt[S];
         for (int i = 0; i < S; i++) {
-            int p = sc.nextInt();
-            int t = sc.nextInt();
-
-            hurts[i] = new Hurt(p,t);
+            hurts[i] = new Hurt(sc.nextInt(), sc.nextInt());
         }
-        int max = 0;
-        Arrays.sort(eats);
-        for(int i = 0; i < S; i++){
-            int hurtPerson = hurts[i].person;
-            int hurtTime = hurts[i].second;
-            for(int j = 0; j < D; j++){
-                int count = 0;
-                if(hurtPerson == eats[j].person && hurtTime>eats[j].second){
-                    int cheeze = eats[j].cheeze;
-                    int cheaker = 0;
-                    for(int l = 0; l<D; l++){
-                        
-                        if(cheeze == eats[l].cheeze && cheaker != eats[l].person){
-                            count ++;
-                            cheaker = eats[l].person;
-                        }
-                        
+
+        int answer = 0;
+
+        for (int cheeseId = 1; cheeseId <= M; cheeseId++) {
+            boolean valid = true;
+
+            // 모든 아픈 사람은 이 치즈를 아프기 전에 먹었어야 한다
+            for (int i = 0; i < S; i++) {
+                boolean ateBeforeSick = false;
+                for (int j = 0; j < D; j++) {
+                    if (eats[j].person == hurts[i].person &&
+                        eats[j].cheese == cheeseId &&
+                        eats[j].time < hurts[i].time) {
+                        ateBeforeSick = true;
+                        break;
                     }
                 }
-                if(count<S) count = 0;
-                max = Math.max(max,count);
+                if (!ateBeforeSick) {
+                    valid = false;
+                    break;
+                }
             }
+
+            if (!valid) continue;
+
+            // 유효한 상한 치즈 후보일 경우, 해당 치즈를 먹은 모든 사람 수 세기
+            boolean[] visited = new boolean[N + 1];
+            int count = 0;
+
+            for (int j = 0; j < D; j++) {
+                if (eats[j].cheese == cheeseId && !visited[eats[j].person]) {
+                    visited[eats[j].person] = true;
+                    count++;
+                }
+            }
+
+            answer = Math.max(answer, count);
         }
-        System.out.println(max);
+
+        System.out.println(answer);
     }
 }
