@@ -1,54 +1,58 @@
 import java.util.*;
 
-class WishList implements Comparable<WishList>{
-    int p;
-    int s;
-    int ps;
+class Main {
+    static class Wish {
+        int p, s;
+        public Wish(int p, int s) {
+            this.p = p;
+            this.s = s;
+        }
 
-    public WishList(int p, int s, int ps){
-        this.p = p;
-        this.s = s;
-        this.ps = ps;
+        public int total() {
+            return p + s;
+        }
+
+        public int discounted() {
+            return p / 2 + s;
+        }
     }
 
-    public int compareTo(WishList w){
-        if( this.ps == w.ps)
-            return (this.p/2 + this.s) - (w.p/2 + w.s);
-        return this.ps -w.ps;
-    }
-}
-
-public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int b = sc.nextInt();
-        WishList [] wishLists = new WishList[n];
-        for(int i = 0; i < n; i++){
-            int p = sc.nextInt();
-            int s = sc.nextInt();
-            wishLists[i] = new WishList(p,s,p+s); 
+        Wish[] wishes = new Wish[n];
+
+        for (int i = 0; i < n; i++) {
+            wishes[i] = new Wish(sc.nextInt(), sc.nextInt());
         }
 
-        Arrays.sort(wishLists);
         int max = 0;
-        for(int i = 0; i < n; i++){
-            int sum = b;
-            int count = 0;
-            for(int j = 0; j<n; j++){
-                if(i == j){
-                    sum -=((wishLists[j].ps-wishLists[j].s)/2 + wishLists[j].s);
-                }else{
-                    sum -=wishLists[j].ps;
-                }
-                if(sum>=0){
-                    count ++;
-                    
-                }else{
+
+        // i번째 선물을 할인하는 경우
+        for (int i = 0; i < n; i++) {
+            int budget = b - wishes[i].discounted();
+            if (budget < 0) continue;
+
+            // i번째 외 나머지를 일반 가격으로 정렬
+            int[] costs = new int[n - 1];
+            int idx = 0;
+            for (int j = 0; j < n; j++) {
+                if (i == j) continue;
+                costs[idx++] = wishes[j].total();
+            }
+            Arrays.sort(costs);
+
+            int cnt = 1; // i번째는 무조건 포함
+            for (int cost : costs) {
+                if (budget >= cost) {
+                    budget -= cost;
+                    cnt++;
+                } else {
                     break;
                 }
             }
-            max = Math.max(max,count);
+            max = Math.max(max, cnt);
         }
 
         System.out.println(max);
