@@ -15,20 +15,19 @@ public class Main {
         int maxCount = 0;
 
         for (int seaLevel = 1; seaLevel <= max; seaLevel++) {
-            int[] arr = new int[n];
-            for (int j = 0; j < n; j++) {
-                arr[j] = (h[j] > seaLevel) ? 1 : 0;
-            }
+
 
             // 이번 seaLevel에서의 빙하 덩어리 수
-            int curCount = 0;
-            for (int j = 0; j < n; j++) {
-                if (arr[j] == 1 && (j == 0 || arr[j - 1] == 0)) {
-                    curCount++;
+            int cnt = 0;
+
+            if(h[0]-seaLevel>0) cnt++;
+            for (int j = 1; j < n; j++) {
+                if (h[j] - seaLevel>0 && h[j-1] -seaLevel <= 0) {
+                    cnt++;
                 }
             }
 
-            maxCount = Math.max(maxCount, curCount); // 가장 큰 덩어리 수 갱신
+            maxCount = Math.max(maxCount, cnt); // 가장 큰 덩어리 수 갱신
         }
 
         System.out.println(maxCount);
