@@ -23,7 +23,7 @@ public class Main {
         
     }
     public static boolean isMystery(int []arr){
-            boolean [] check = new boolean [10];
+            int [] check = new int [10];
 
             for(int i = 0; i<7;i++){
                 if(arr[i] != 0) break;
@@ -33,13 +33,15 @@ public class Main {
             for(int i = 0; i<7;i++){
                 if(arr[i] == -1) continue;
 
-                check[arr[i]] = true;
+                check[arr[i]] ++;
             }
-            int cnt = 0;
+            int cnt1 = 0;
+            int cnt2 = 0;
             for(int i = 0; i<10;i++){
-                if(check[i]) cnt++;
+                if(check[i]>=2) cnt2++; 
+                if(check[i]==1) cnt1++;
             }
-            if(cnt==2) return true;
+            if(cnt2==1 && cnt1 ==1) return true;
                 
             
             return false;
