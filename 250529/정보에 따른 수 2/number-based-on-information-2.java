@@ -26,16 +26,28 @@ public class Main {
             int nlen2 =Integer.MAX_VALUE;
 
             for(int j = i; j<1001; j++){
-                if(arr[j] == 1) slen1 = j-i;
+                if(arr[j] == 1) {
+                    slen1 = j-i;
+                    break;
+                }
             }
             for(int j = i; j<1001; j++){
-                if(arr[j] == 2) nlen1 = j-i;
+                if(arr[j] == 2){
+                    nlen1 = j-i;
+                    break;
+                } 
             }
             for(int j = i; j>=1; j--){
-                if(arr[j] == 1) slen2 = i-j;
+                if(arr[j] == 1) {
+                    slen2 = i-j;
+                    break;
+                }
             }
             for(int j = i; j>=1; j--){
-                if(arr[j] == 2) nlen2 = i-j;
+                if(arr[j] == 2) {
+                    nlen2 = i-j;
+                    break;
+                }
             }
 
             int sLen = Math.min(slen1,slen2);
