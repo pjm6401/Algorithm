@@ -5,7 +5,7 @@ public class Main {
         int x = sc.nextInt();
         int y = sc.nextInt();
         int max = 0;
-        for(int i = x; i<y; i++){
+        for(int i = x; i<=y; i++){
 
             int a = i /10000;
             int b = (i /1000) % 10;
