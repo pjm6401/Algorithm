@@ -18,7 +18,7 @@ public class Main {
         }
         int cnt = 0;
 
-        for(int i = 1; i<1001; i++){
+        for(int i = a; i<=b; i++){
 
             int slen1 =Integer.MAX_VALUE;
             int slen2 =Integer.MAX_VALUE;
