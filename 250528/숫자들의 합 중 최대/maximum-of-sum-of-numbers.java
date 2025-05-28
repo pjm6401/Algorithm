@@ -9,8 +9,8 @@ public class Main {
 
             int a = i /10000;
             int b = (i /1000) % 10;
-            int c = (i / 100) % 100;
-            int d = (i / 10) % 1000;
+            int c = (i / 100) % 10;
+            int d = (i / 10) % 10;
             int e = i%10;
             
             max = Math.max(max,a+b+c+d+e);
