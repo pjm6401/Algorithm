@@ -22,13 +22,13 @@ public class Main {
             for(int j = i+1; j<=9; j++){
                 if(i==j) continue;
                 if(isWin(i,j,arr[0][0],arr[0][1],arr[0][2])) ans++;
-                if(isWin(i,j,arr[1][0],arr[1][1],arr[1][2])) ans++;
-                if(isWin(i,j,arr[2][0],arr[2][1],arr[2][2])) ans++;
-                if(isWin(i,j,arr[0][0],arr[1][0],arr[2][0])) ans++;
-                if(isWin(i,j,arr[0][1],arr[1][1],arr[2][1])) ans++;
-                if(isWin(i,j,arr[0][2],arr[1][2],arr[2][2])) ans++;
-                if(isWin(i,j,arr[0][0],arr[1][1],arr[2][2])) ans++;
-                if(isWin(i,j,arr[0][2],arr[1][1],arr[2][0])) ans++;
+                else if(isWin(i,j,arr[1][0],arr[1][1],arr[1][2])) ans++;
+                else if(isWin(i,j,arr[2][0],arr[2][1],arr[2][2])) ans++;
+                else if(isWin(i,j,arr[0][0],arr[1][0],arr[2][0])) ans++;
+                else if(isWin(i,j,arr[0][1],arr[1][1],arr[2][1])) ans++;
+                else if(isWin(i,j,arr[0][2],arr[1][2],arr[2][2])) ans++;
+                else if(isWin(i,j,arr[0][0],arr[1][1],arr[2][2])) ans++;
+                else if(isWin(i,j,arr[0][2],arr[1][1],arr[2][0])) ans++;
 
             }
         }
@@ -47,6 +47,7 @@ public class Main {
         if(b == i3) bCount++;
         
         if((aCount==2 && bCount ==1 ) || (aCount==1 && bCount ==2 )){
+
             return true;
         }
 
