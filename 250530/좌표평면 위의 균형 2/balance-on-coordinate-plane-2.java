@@ -11,9 +11,9 @@ public class Main {
         }
         int min = Integer.MAX_VALUE;
 
-        for(int i = 2; i<=10; i++){
+        for(int i = 2; i<=100; i++){
             if(i%2==1)continue;
-            for(int j = 2; j<=10; j++){
+            for(int j = 2; j<=100; j++){
                 if(j%2==1)continue;
                 int one=0;
                 int two=0;
