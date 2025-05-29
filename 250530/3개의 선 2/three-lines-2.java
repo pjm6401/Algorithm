@@ -18,7 +18,6 @@ public class Main {
             for (int j = 0; j < n; j++) {
                 if(x[j] == i) dx[i]++;
                 if(y[j] == i) dy[i]++;
-                
             }
         }
 
@@ -26,10 +25,11 @@ public class Main {
         int cntX = 0;
         int cntY = 0;
         for(int i = 0; i<=20; i++){
+
             if(dx[i]>=2 ){
                 cntX++;
             }
-            if(dy[i]>=2 ){
+            else if(dy[i]>=2 ){
                 cntY++;
             }
         }
