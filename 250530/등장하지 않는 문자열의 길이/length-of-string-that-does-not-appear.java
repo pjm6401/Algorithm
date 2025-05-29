@@ -1,27 +1,30 @@
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         String str = sc.next();
-        int idx = 0;
-        for(int i = 0; i<str.length()-1;i++){
-            boolean flag = false;
-            for(int j = i+1; j<str.length();j++){
-                if(str.charAt(i)==str.charAt(j)){
-                    flag = true;
+
+        for (int len = 1; len <= n; len++) {
+            Set<String> set = new HashSet<>();
+            boolean duplicated = false;
+
+            for (int i = 0; i <= n - len; i++) {
+                String substr = str.substring(i, i + len);
+                if (set.contains(substr)) {
+                    duplicated = true;
                     break;
                 }
+                set.add(substr);
             }
-            if(flag){
-                continue;
-            }else{
-                idx = i+1;
-                break;
+
+            if (!duplicated) {
+                System.out.println(len);
+                return;
             }
         }
-
-        System.out.println(idx);
     }
 }
