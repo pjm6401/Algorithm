@@ -1,30 +1,43 @@
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
+    public static int n;
+    public static String str;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        String str = sc.next();
 
-        for (int len = 1; len <= n; len++) {
-            Set<String> set = new HashSet<>();
-            boolean duplicated = false;
+        n = sc.nextInt();
+        
+        str = sc.next();
 
-            for (int i = 0; i <= n - len; i++) {
-                String substr = str.substring(i, i + len);
-                if (set.contains(substr)) {
-                    duplicated = true;
-                    break;
+        int ans = 1;
+
+        for(int i = 1; i < n; i++) {
+
+            boolean twice = false;
+
+            for(int j = 0; j <= n - i; j++) {
+                for(int k = j + 1; k <= n - i; k++) {
+                    // issame : j부터 i길이의 부분 문자열과
+                    // k부터 i길이의 부분 문자열이 완전히 같으면 true
+                    boolean issame = true;
+
+                    for(int l = 0; l < i; l++) {
+                        if(str.charAt(j + l) != str.charAt(k + l))
+                            issame = false;
+                    }
+
+                    if(issame) twice = true;
                 }
-                set.add(substr);
             }
 
-            if (!duplicated) {
-                System.out.println(len);
-                return;
-            }
+            if(twice)
+                ans = i + 1;
+            else
+                break;
         }
+
+        System.out.print(ans);
     }
 }
