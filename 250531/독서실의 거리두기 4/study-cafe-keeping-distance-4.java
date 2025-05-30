@@ -30,19 +30,18 @@ public class Main {
     }
 
 
-    public static int minimum(int [] arr){
-        int index = 0;
+    public static int minimum(int[] arr) {
         int min = Integer.MAX_VALUE;
-        for(int i = 0; i<arr.length; i++){
-            if(arr[i] ==1 ){
-                int length = i-index;
-                if(length != 0){
-                    min = Math.min(min,length);
+        int index = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 1) {
+                if (index != -1) {
+                    min = Math.min(min, i - index);
                 }
-                
                 index = i;
             }
         }
         return min;
     }
+
 }
