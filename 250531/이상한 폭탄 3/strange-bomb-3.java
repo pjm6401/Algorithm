@@ -38,10 +38,10 @@ public class Main {
 
         }
         int index= 0;
-        int cnt = 0;
+        int cntMax = 0;
         for(int i = 1; i< max+1; i++){
-            if(result[i]>cnt){
-                cnt = result[i];
+            if(result[i]>cntMax){
+                cntMax = result[i];
                 index = i;
             }
         }
