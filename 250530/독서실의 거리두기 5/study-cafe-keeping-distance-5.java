@@ -9,50 +9,23 @@ public class Main {
             if(seat.charAt(i) =='1') dis[i] = 1;
         }
         
-        int min = 20;
-
-        for(int i = 0; i < n; i++){
-            if(dis[i] == 0) continue;
-            int distance = 0;
-            for(int j = i+1; j<n; j++){
-                if(j==n-1) {
-                    distance = 20;
-                    break;
-                }
-                if(dis[j] == 1){
-                    distance++;
-                    break;
-                }
-                distance++;
-            } 
-            min = Math.min(min,distance);
-        }
-
         int max = 0;
         for(int i = 0; i < n; i++){
-            if(dis[i] == 0) continue;
+            if(dis[i] == 1) continue;
 
-            if(dis[i] == 1){
-                int mDis = 1;
-                for(int j = i+1; j<n; j++ ){
-                    if (dis[j] == 1) break;
-                    mDis = j - i;
-                    int pDis = 0;
-                    for(int k = j ; k<n; k++){
-                        if(k==n-1) {
-                            pDis = mDis;
-                            break;
-                        }
-                        if (dis[k] == 1 ) break;
-                        pDis++;
+            dis[i] = 1;
+            int min = 20;
+            for(int j = 0; j<n; j++){
+                if(dis[j] == 0) continue;
+                for(int k = j+1; k<n; k++){
+                    if(dis[k] == 1){
+                        min = Math.min(min, k-j);
+                        break;
                     }
-
-                    if(max<Math.min(pDis,Math.min(mDis,min))){
-                        max = Math.min(pDis,Math.min(mDis,min));
-                    }
-
-                }
+                } 
             }
+            max = Math.max(max,min);
+            dis[i] = 0;
         }
 
         System.out.println(max);
