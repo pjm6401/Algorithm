@@ -9,12 +9,13 @@ public class Main {
             a[i] = sc.nextInt();
             b[i] = sc.nextInt();
         }
-        int min = 10;
+        int min = Integer.MAX_VALUE;
         for(int i = 1; i<=10000; i++){
             int num = i;
             boolean flag = true;
             for(int j = 0; j < n; j++){
                 num *=2;
+
                 if(!(a[j]<=num && b[j]>= num)){
                     flag = false;
                     break;
