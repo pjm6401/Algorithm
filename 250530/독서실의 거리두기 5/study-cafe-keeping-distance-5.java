@@ -8,6 +8,26 @@ public class Main {
         for(int i = 0; i < seat.length(); i++){
             if(seat.charAt(i) =='1') dis[i] = 1;
         }
+        
+        int min = 20;
+
+        for(int i = 0; i < n; i++){
+            if(dis[i] == 0) continue;
+            int distance = 0;
+            for(int j = i+1; j<n; j++){
+                if(j==n-1) {
+                    distance = 20;
+                    break;
+                }
+                if(dis[j] == 1){
+                    distance++;
+                    break;
+                }
+                distance++;
+            } 
+            min = Math.min(min,distance);
+        }
+
         int max = 0;
         for(int i = 0; i < n; i++){
             if(dis[i] == 0) continue;
@@ -27,8 +47,8 @@ public class Main {
                         pDis++;
                     }
 
-                    if(max<Math.min(pDis,mDis)){
-                        max = Math.min(pDis,mDis);
+                    if(max<Math.min(pDis,Math.min(mDis,min))){
+                        max = Math.min(pDis,Math.min(mDis,min));
                     }
 
                 }
