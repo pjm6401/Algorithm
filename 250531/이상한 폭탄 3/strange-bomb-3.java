@@ -18,7 +18,7 @@ public class Main {
         for(int i = 0; i<n; i++){
             int bomb = bombs[i];
             boolean boom = false;
-            for(int j = i+1; j < i+k; j++ ){
+            for(int j = i+1; j <= i+k; j++ ){
                 if(j>=n) break;
                 if (bomb == bombs[j] && boom == false){
                     boom = true;
