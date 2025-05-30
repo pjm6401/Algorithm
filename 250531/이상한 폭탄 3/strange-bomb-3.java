@@ -18,14 +18,14 @@ public class Main {
         for(int i = 0; i<n; i++){
             int bomb = bombs[i];
             boolean boom = false;
-            for(int j = i+1; j < i+k+1; j++ ){
+            for(int j = i+1; j < i+k; j++ ){
                 if(j>=n) break;
                 if (bomb == bombs[j] && boom == false){
                     boom = true;
                     break;
                 } 
             }
-            for(int j = i-1; j >= i-k-1; j--){
+            for(int j = i-1; j >= i-k; j--){
                 if(j<0) break;
                 if (bomb == bombs[j] && boom == false){
                     boom = true;
@@ -40,7 +40,6 @@ public class Main {
         int index= 0;
         int cnt = 0;
         for(int i = 1; i< max+1; i++){
-           
             if(result[i]>cnt){
                 cnt = result[i];
                 index = i;
