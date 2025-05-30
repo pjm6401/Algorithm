@@ -10,16 +10,13 @@ public class Main {
             b[i] = sc.nextInt();
         }
         int min = 10;
-        for(int i = 1; i<=10; i++){
+        for(int i = 1; i<=10000; i++){
             int num = i;
             boolean flag = true;
             for(int j = 0; j < n; j++){
                 num *=2;
                 if(!(a[j]<=num && b[j]>= num)){
                     flag = false;
-                    break;
-                }
-                if(!flag){
                     break;
                 }
             }
