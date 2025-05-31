@@ -13,7 +13,7 @@ public class Main {
         for(int i = x3; i<=x4; i++){
             arr[i]++;
         }
-        String ans = "nointersecting";
+        String ans = "nonintersecting";
         for(int i = 1; i<=100; i++){
             if(arr[i]>=2){
                 ans = "intersecting";
