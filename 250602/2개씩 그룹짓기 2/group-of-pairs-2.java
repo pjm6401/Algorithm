@@ -1,25 +1,26 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    static int n;
-    static int[] nums;
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        nums = new int[2 * n];
+
+        int n = sc.nextInt();
+        int[] arr = new int[2 * n];
+
         for (int i = 0; i < 2 * n; i++) {
-            nums[i] = sc.nextInt();
-        }
-        int max = 0;
-        Arrays.sort(nums);
-
-
-        for(int i = 0; i<2*n; i+=2){
-            max = Math.max(max, nums[i+1] - nums[i]);
+            arr[i] = sc.nextInt();
         }
 
-        System.out.println(max);
+        Arrays.sort(arr);
+
+        
+
+        long minDiff = Long.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            minDiff = Math.min(minDiff, (long) arr[n + i] - arr[i]);
+        }
+
+        System.out.println(minDiff);
     }
 }
