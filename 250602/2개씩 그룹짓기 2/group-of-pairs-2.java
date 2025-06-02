@@ -2,54 +2,54 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    static int n;
+    static int[] nums;
 
-    public static boolean canFormNGroups(int[] arr, int minDiff, int n) {
-    boolean[] used = new boolean[arr.length];
-    return dfs(arr, used, 0, n, minDiff);
-}
+    public static boolean isPossible(int minDiff) {
+        // 그룹 수
+        int count = 0;
+        boolean[] used = new boolean[2 * n];
 
-public static boolean dfs(int[] arr, boolean[] used, int index, int remainGroups, int minDiff) {
-    if (remainGroups == 0) return true;
-    for (int i = index; i < arr.length - 1; i++) {
-        if (used[i]) continue;
-        for (int j = i + 1; j < arr.length; j++) {
-            if (used[j]) continue;
-            if (arr[j] - arr[i] >= minDiff) {
-                used[i] = used[j] = true;
-                if (dfs(arr, used, i + 1, remainGroups - 1, minDiff)) return true;
-                used[i] = used[j] = false;
+        for (int i = 0; i < 2 * n; i++) {
+            if (used[i]) continue;
+
+            for (int j = i + 1; j < 2 * n; j++) {
+                if (used[j]) continue;
+                if (Math.abs(nums[i] - nums[j]) >= minDiff) {
+                    used[i] = true;
+                    used[j] = true;
+                    count++;
+                    break;
+                }
             }
         }
-    }
-    return false;
-}
-public static int maximizeMinDifference(int[] nums) {
-    Arrays.sort(nums);
-    int n = nums.length / 2;
-    int left = 0;
-    int right = nums[nums.length - 1] - nums[0];
-    int answer = 0;
-
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        if (canFormNGroups(nums, mid, n)) {
-            answer = mid;
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
+        return count >= n;
     }
 
-    return answer;
-}
- public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // 그룹 수
-        int[] nums = new int[2 * n];
+        n = sc.nextInt();
+        nums = new int[2 * n];
         for (int i = 0; i < 2 * n; i++) {
             nums[i] = sc.nextInt();
         }
 
-        System.out.println(maximizeMinDifference(nums));
+        Arrays.sort(nums);
+
+        int left = 0;
+        int right = nums[2 * n - 1] - nums[0];
+        int answer = 0;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (isPossible(mid)) {
+                answer = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        System.out.println(answer);
     }
 }
