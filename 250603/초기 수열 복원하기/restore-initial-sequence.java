@@ -8,7 +8,7 @@ public class Main {
             a[i] = sc.nextInt();
         
         for(int i = 1; i<=1000;i++){
-            int [] check = new int [1001];
+            int [] check = new int [2001];
             int [] ans = new int [n];
             int start = i;
             boolean flag = true;
