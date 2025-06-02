@@ -17,7 +17,7 @@ public class Main {
             for(int j = 0; j< n-1; j++){
                 int sum = a[j];
                 int b = sum - ans[j];
-                if(check[b] == 0 && b >0){
+                if(b >0 && check[b] == 0 ){
                     ans[j+1] = b;
                     check[b]++;  
                 }else{
