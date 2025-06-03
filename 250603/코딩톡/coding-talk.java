@@ -14,14 +14,24 @@ public class Main {
         }
         //p 번째 메세지를 보낸사람과, 이후 채팅방에 메세지를 남긴 사람은 모두 읽음.
         for (int i = p-1; i < M; i++) {
-            if(u[p-1] == 0){
-                
-                check[i] = true;
-            }else{
-                int charInt = c[i] - 'A';
-                check[charInt] = true;
+            int charInt = c[i] - 'A';
+            check[charInt] = true;
+        }
+        int nRead = u[p-1]; //안읽은 사람의 수 
+        if(nRead == 0){
+            for(int j = 0; j<N; j++){
+                check[j] = true;
+            }
+        }else{
+            for (int i = p-2; i >=0 ; i--) {
+                int nReadCnt = u[i];
+                if(nRead == u[i]){
+                    int charInt = c[i] - 'A';
+                    check[charInt] = true;
+                }
             }
         }
+        
 
         for(int i =0; i<N; i++){
             //System.out.print(check[i]+" ");
