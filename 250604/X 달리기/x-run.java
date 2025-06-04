@@ -1,41 +1,36 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int X = sc.nextInt(); // 목표 거리
+    static Map<String, Integer> memo = new HashMap<>();
 
-        int speed = 0;
-        int distance = 0;
-        int time = 0;
+    public static int dfs(int distance, int speed) {
+        if (distance < 0 || speed <= 0) return Integer.MAX_VALUE / 2; // invalid
+        if (distance == 0 && speed == 1) return 0;
 
-        while (true) {
-            // 남은 거리 계산
-            int remain = X - distance;
+        String key = distance + "," + speed;
+        if (memo.containsKey(key)) return memo.get(key);
 
-            // 도착 조건: 도착 거리이고 속도 1이면 완료
-            if (remain == 0 && speed == 1) break;
+        int min = Integer.MAX_VALUE / 2;
 
-            // 속도를 줄였을 때, 도착까지 정확히 맞출 수 있는 최소 거리 계산
-            int slowDownDistance = (speed * (speed + 1)) / 2;
-
-            if (remain > slowDownDistance) {
-                speed++;
-            } else if (remain < slowDownDistance) {
-                if (speed > 1) speed--;
-            }
-            // else : 그대로 유지
-
-            distance += speed;
-            time++;
-
-            // 안전장치: 루프가 너무 길어질 경우 종료 (비정상)
-            if (time > 100000) {
-                System.out.println("시간 초과 (비정상 동작)");
-                return;
-            }
+        // try speed-1, speed, speed+1
+        for (int dSpeed = -1; dSpeed <= 1; dSpeed++) {
+            int nextSpeed = speed + dSpeed;
+            if (nextSpeed <= 0) continue;
+            min = Math.min(min, 1 + dfs(distance - nextSpeed, nextSpeed));
         }
 
-        System.out.println(time);
+        memo.put(key, min);
+        return min;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int X = sc.nextInt();
+
+        // 초기 속도 0 -> 다음 속도 1부터 시작해야 함
+        int answer = dfs(X - 1, 1) + 1; // 처음 1m/s로 이동 후 탐색 시작
+        System.out.println(answer);
     }
 }
