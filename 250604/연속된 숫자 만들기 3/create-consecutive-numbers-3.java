@@ -1,41 +1,19 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        int c = sc.nextInt();
-        int [] arr = {a,b,c};
+        int[] arr = new int[3];
+        arr[0] = sc.nextInt();
+        arr[1] = sc.nextInt();
+        arr[2] = sc.nextInt();
 
-        int cnt = 0;
+        Arrays.sort(arr); // 정렬하여 순서를 맞춘다
 
-        while(true){
-            int [] arrTemp = {arr[0],arr[1],arr[2]};
-            Arrays.sort(arrTemp);
-            if(arrTemp[0]+1 == arrTemp[1] && arrTemp[1]+1 == arrTemp[2]) break;
+        int leftGap = arr[1] - arr[0];
+        int rightGap = arr[2] - arr[1];
 
-            int disA = Math.abs(arr[0]- arr[1]);
-            int disB = Math.abs(arr[1]-arr[2]);
-
-            if(disA>disB){
-                if(arr[1]>arr[0]){
-                    arr[2] = arr[1];
-                    arr[1]--;
-                }else{
-                    arr[2] = arr[1];
-                    arr[1] = arr[0]+1;
-                }
-            }else{
-                if(arr[2]>arr[1]){
-                    arr[0] = arr[1];
-                    arr[1]++;
-                }else{
-                    arr[0] = arr[1];
-                    arr[1]--;
-                }
-            }
-            cnt ++;
-        }
-        System.out.println(cnt);
+        // 가장 큰 gap 쪽으로 수를 이동시키면 됨
+        System.out.println(Math.max(leftGap, rightGap) - 1);
     }
 }
