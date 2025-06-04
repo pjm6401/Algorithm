@@ -5,7 +5,7 @@ public class Main {
         int n = sc.nextInt();
         int scoreA =0;
         int scoreB =0;
-        int start = -1;
+        int start = 2;
         int cnt = 0;
         for (int i = 0; i < n; i++) {
             char c = sc.next().charAt(0);
