@@ -3,13 +3,13 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int start = 6;
+        int start = 9;
         int scoreA = 0;
         int scoreB = 0;
         int scoreC = 0;
         int winA = 1;
-        int winB = 2;
-        int winC = 3;
+        int winB = 3;
+        int winC = 5;
 
         int cnt = 0;
         for (int i = 0; i < n; i++) {
