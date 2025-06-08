@@ -23,7 +23,7 @@ public class Main {
             }else if(command.charAt(0)=='D'&& it.hasNext()){
                 it.next();
                 it.remove();
-            }else{
+            }else if(command.charAt(0)=='P'&& it.hasNext()){
                 String p = sc.next();
                 it.add(p.charAt(0));
             }
