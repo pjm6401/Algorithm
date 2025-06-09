@@ -7,6 +7,7 @@ Welcome to my algorithm study log! This repository is where I document my journe
 ## 🌟 Goals
 
 - 하루에 최소 한시간 공부
+- 이론은 블로그에 정리하기
 
 ---
 
