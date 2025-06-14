@@ -12,7 +12,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt(); // 배열 값 입력
         }
-
+        mergedArr = new int[n]; // 병합에 사용할 보조 배열 초기화
         
 
         mergeSort(arr, 0, n - 1); // 병합 정렬 실행
@@ -38,7 +38,7 @@ public class Main {
         int i = low;
         int j = mid + 1;
         int k = low;
-        mergedArr = new int[n]; // 병합에 사용할 보조 배열 초기화
+        
         // 두 부분을 비교하면서 작은 값을 보조 배열에 넣음
         while (i <= mid && j <= high) {
             if (arr[i] <= arr[j]) {
