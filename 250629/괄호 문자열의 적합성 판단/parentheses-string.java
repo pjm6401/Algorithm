@@ -11,6 +11,7 @@ public class Main {
                 s.push(k);
             }else if(k == ')'){
                 if(s.empty()){
+                    s.push(k);
                     break;
                 }
                 s.pop();
