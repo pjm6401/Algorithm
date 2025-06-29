@@ -10,6 +10,9 @@ public class Main {
             if(k=='('){
                 s.push(k);
             }else if(k == ')'){
+                if(s.empty()){
+                    break;
+                }
                 s.pop();
             }
         }
