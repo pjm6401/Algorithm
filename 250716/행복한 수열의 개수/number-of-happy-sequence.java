@@ -10,7 +10,15 @@ public class Main {
         for (int i = 0; i < n; i++)
             for (int j = 0; j < n; j++)
                 grid[i][j] = sc.nextInt();
+
+        
+        if(m==1){
+            System.out.println(n*2);
+            return;
+        }
         int count = 0;
+
+
         for(int i = 0; i <n; i++){
             int rCount = m-1;
             int cCount = m-1;
