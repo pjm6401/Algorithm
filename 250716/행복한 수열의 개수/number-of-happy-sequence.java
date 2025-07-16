@@ -15,9 +15,16 @@ public class Main {
             int rCount = m-1;
             int cCount = m-1;
             for(int j = 0; j<n-1; j++){
-                if(grid[i][j] == grid[i][j+1]) rCount --;
-
-                if(grid[j][i] == grid[j+1][i]) cCount --;
+                if(grid[i][j] == grid[i][j+1]) {
+                    rCount --;
+                }else{
+                    rCount = m-1;
+                }
+                if(grid[j][i] == grid[j+1][i]) {
+                    cCount --;
+                }else{
+                    cCount = m-1;
+                }
             }
             if(cCount<=0) count++;
             if(rCount<=0) count++;
