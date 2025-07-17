@@ -20,11 +20,11 @@ public class Main {
             for (int j = 0; j < m; j++) {
                 if(isCaseA(i,j)){
                     maxA = Math.max(maxA,grid[i-1][j] + grid[i][j] +grid[i][j+1]);
-                }else if(isCaseB(i,j)){
+                }if(isCaseB(i,j)){
                     maxA = Math.max(maxA,grid[i+1][j] + grid[i][j] +grid[i][j+1]);
-                }else if(isCaseC(i,j)){
+                }if(isCaseC(i,j)){
                     maxA = Math.max(maxA,grid[i-1][j] + grid[i][j] +grid[i][j-1]);
-                }else if(isCaseD(i,j)){
+                }if(isCaseD(i,j)){
                     maxA = Math.max(maxA,grid[i+1][j] + grid[i][j] +grid[i][j-1]);
                 }
             }
@@ -32,9 +32,9 @@ public class Main {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-               if(isCaseE(i,j)){
+                if(isCaseE(i,j)){
                     maxB = Math.max(maxB,grid[i][j] + grid[i][j+1] +grid[i][j+2]);
-                }else if(isCaseF(i,j)){
+                }if(isCaseF(i,j)){
                     maxB = Math.max(maxB,grid[i][j] + grid[i+1][j] +grid[i+2][j]);
                 }
             }
@@ -45,7 +45,7 @@ public class Main {
     }
     
     public static boolean isCaseA(int i, int j){
-        if(i-1 > 0 && j+1 < m) return true;
+        if(i-1 >= 0 && j+1 < m) return true;
         return false;
     }
     public static boolean isCaseB(int i, int j){
@@ -53,11 +53,11 @@ public class Main {
         return false;
     }
     public static boolean isCaseC(int i, int j){
-        if(i-1 > 0 && j-1 > 0) return true;
+        if(i-1 >= 0 && j-1 >= 0) return true;
         return false;
     }
     public static boolean isCaseD(int i, int j){
-        if(i+1 < n  && j-1 > 0) return true;
+        if(i+1 < n  && j-1 >= 0) return true;
         return false;
     }
     public static boolean isCaseE(int i, int j){
