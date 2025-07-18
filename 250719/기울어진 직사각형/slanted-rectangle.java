@@ -15,8 +15,8 @@ public class Main {
 
         int max = 0;
         // (i,j) = 시작 꼭짓점
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < n-2; i++) {
+            for (int j = 1; j < n-1; j++) {
                 // 가능한 모든 길이 시도
                 for (int len1 = 1; i + len1 < n && j - len1 >= 0; len1++) {
                     for (int len2 = 1; i + len1 + len2 < n && j + len2 < n; len2++) {
