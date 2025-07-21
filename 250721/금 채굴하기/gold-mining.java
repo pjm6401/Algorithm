@@ -14,13 +14,13 @@ public class Main {
         int limit = n/2;
 
         int maxCount = 0;
-        for(int k = 0; k<=limit; k++){
+        for(int k = 0; k<n; k++){
             for (int i = 0; i < n; i++){
                 for (int j = 0; j < n; j++){
                     int cost = (k*k) + ((k+1)*(k+1));
+                    if(cost>n*n) cost = n*n;
                     int goldCount = calc(i,j,k,grid);
                     int gold = m * goldCount;
-
                     if(gold>cost){
                         maxCount = Math.max(maxCount,goldCount);
                     }
