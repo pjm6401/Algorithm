@@ -18,7 +18,6 @@ public class Main {
             for (int i = 0; i < n; i++){
                 for (int j = 0; j < n; j++){
                     int cost = (k*k) + ((k+1)*(k+1));
-                    if(cost>n*n) cost = n*n;
                     int goldCount = calc(i,j,k,grid);
                     int gold = m * goldCount;
                     
@@ -31,7 +30,7 @@ public class Main {
         System.out.println(maxCount);
     }
 
-    public static int calc (int x, int y, int k, int [][] grid){
+   public static int calc (int x, int y, int k, int [][] grid){
         int goldCount = 0;
         
         for(int i = k; i>=0; i--){
@@ -71,8 +70,7 @@ public class Main {
         }
  
         return goldCount;
-    }
-
+   }
     public static boolean isIndex(int dx, int dy){
         return (dx>=0 && dy>=0 && dx<n && dy<n);
     }
