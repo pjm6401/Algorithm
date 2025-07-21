@@ -15,8 +15,8 @@ public class Main {
 
         int maxCount = 0;
         for(int k = 0; k<=limit; k++){
-            for (int i = k; i < n-k; i++){
-                for (int j = k; j < n-k; j++){
+            for (int i = 0; i < n; i++){
+                for (int j = 0; j < n; j++){
                     int cost = (k*k) + ((k+1)*(k+1));
                     int goldCount = calc(i,j,k,grid);
                     int gold = m * goldCount;
@@ -42,33 +42,37 @@ public class Main {
             for(int j = 0; j<i; j++){
                 dx +=1;
                 dy -=1;
-                if(grid[dx][dy]==1) {
+                if(isIndex(dx,dy) && grid[dx][dy]==1) {
                     goldCount ++;
                 }
             }
             for(int j = 0; j<i; j++){
                 dx +=1;
                 dy +=1;         
-                if(grid[dx][dy]==1) {
+                if(isIndex(dx,dy) && grid[dx][dy]==1) {
                     goldCount ++;
                 }
             }
             for(int j = 0; j<i; j++){
                 dx -=1;
                 dy +=1;
-                if(grid[dx][dy]==1) {
+                if(isIndex(dx,dy) && grid[dx][dy]==1) {
                     goldCount ++;
                 }
             }
             for(int j = 0; j<i; j++){
                 dx -=1;
                 dy -=1;
-                if(grid[dx][dy]==1) {
+                if(isIndex(dx,dy) && grid[dx][dy]==1) {
                     goldCount ++;
                 }
             }
         }
  
         return goldCount;
+    }
+
+    public static boolean isIndex(int dx, int dy){
+        return (dx>=0 && dy>=0 && dx<n && dy<n);
     }
 }
