@@ -21,7 +21,8 @@ public class Main {
                     if(cost>n*n) cost = n*n;
                     int goldCount = calc(i,j,k,grid);
                     int gold = m * goldCount;
-                    if(gold>cost){
+                    
+                    if(gold>=cost){
                         maxCount = Math.max(maxCount,goldCount);
                     }
                 }
