@@ -14,7 +14,7 @@ public class Main {
         int limit = n/2;
 
         int maxCount = 0;
-        for(int k = 0; k<n; k++){
+        for(int k = 0; k<=n; k++){
             for (int i = 0; i < n; i++){
                 for (int j = 0; j < n; j++){
                     int cost = (k*k) + ((k+1)*(k+1));
