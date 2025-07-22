@@ -29,29 +29,44 @@ public class Main {
     }
 
     public static int countRec(int x, int y, int [][]grid){
-        
+        //x 9  y 6 
         int dy = y;
-
+        
         for(int j = y; j<m; j++){
             if(grid[x][j]<=0) break;
             dy = j;
-        }
        
-        int min = 21;
+        }
+        int aMin = 21;
+        int bMin = 21;
+        int bSize  = 0;
         int down = 0;
         for(int j = y; j<=dy; j++){
             int count = 0;
             for(int i = x; i<n; i++){
-                if(grid[i][j]<=0) break;
+                if(grid[i][j]<=0){
+                    break;
+                } 
                 if(j==y) down++;
                 count ++;
-                
             }
-            min = Math.min(min,count);
+            aMin = Math.min(aMin,count);
         }
 
-        int size = min * (dy - y +1);
-        return Math.max(down,size); 
+        for(int i = x; i<x+down;i++){
+            int temp = 0;
+            for(int j = y; j<=dy; j++){
+                if(grid[i][j]<=0) break;
+                temp++;
+            }
+            int heigth = i - x + 1;
+            bMin = Math.min(bMin,temp);
+            //if(x==9 && y==6) System.out.println(bMin*heigth);
+            bSize = Math.max(bSize,bMin*heigth);
+        }
+        int aSize = aMin * (dy - y +1);  
+        
+        return Math.max(down,Math.max(aSize,bSize)); 
     }
 
 }
