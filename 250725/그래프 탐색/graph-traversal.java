@@ -17,8 +17,8 @@ public class Main {
             grid[v[i]][u[i]] = 1;
         }
         DFS(1,grid,visited);
-
-        System.out.println(vertexCnt-1);
+        if(vertexCnt !=0 ) vertexCnt-=1;
+        System.out.println(vertexCnt);
     }
 
     public static void DFS (int v, int [][]grid,boolean [] visited) {
