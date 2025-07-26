@@ -15,7 +15,7 @@ public class Main {
                 grid[i][j] = sc.nextInt();
             }
         }
-        int safe = 0;
+        int safe = -1;
                 
         for(int k = 1; k <= 100; k++){
             int safeTemp = 0;
