@@ -33,43 +33,17 @@ public class Main {
         x -=1;
         y -=1;
 
-        int tx = x;
-        int ty = y;
+
         int bomb = grid[x][y];
         int bombRange = bomb -=1;
         grid[x][y] = 0;
-        for(int i = 0; i<bombRange; i++){
-            if(isRange(tx+dx[0],ty+dy[0])){
-                tx +=dx[0];
-                ty +=dy[0];
-                grid[tx][ty] = 0;
-            }
-        }
-        tx = x;
-        ty = y;
-        for(int i = 0; i<bombRange; i++){
-            if(isRange(tx+dx[1],ty+dy[1])){
-                tx +=dx[1];
-                ty +=dy[1];
-                grid[tx][ty] = 0;
-            }
-        }
-        tx = x;
-        ty = y;
-        for(int i = 0; i<bombRange; i++){
-            if(isRange(tx+dx[2],ty+dy[2])){
-                tx +=dx[2];
-                ty +=dy[2];
-                grid[tx][ty] = 0;
-            }
-        }
-        tx = x;
-        ty = y;
-        for(int i = 0; i<bombRange; i++){
-            
-            if(isRange(tx+dx[3],ty+dy[3])){
-                tx +=dx[3];
-                ty +=dy[3];
+        for (int dir = 0; dir < 4; dir++) {
+            int tx = x;
+            int ty = y;
+            for (int i = 0; i < bombRange; i++) {
+                tx += dx[dir];
+                ty += dy[dir];
+                if (!isRange(tx, ty)) break;
                 grid[tx][ty] = 0;
             }
         }
