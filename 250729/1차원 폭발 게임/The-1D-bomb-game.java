@@ -1,63 +1,66 @@
 import java.util.Scanner;
 
 public class Main {
-
-    static int [] temp = new int [101];
+    static int[] temp = new int[101];
+    static int[] bombs = new int[101];
     static int n;
     static int m;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
-        int[] bombs = new int[n];
         for (int i = 0; i < n; i++) {
             bombs[i] = sc.nextInt();
         }
+
         boolean flag = true;
+        int length = n;
 
-        while (flag){
-            temp = new int [101];
+        while (flag) {
             flag = false;
-            int count = 1;
             int index = 0;
-            int start = 0;
-            int end = 0;
-            for(int i = 0; i<n-1; i++){
 
-                if(bombs[i] == 0){
-                    flag = false;
-                    count=0;
-                    break;
+            // 0 제거하고 앞으로 당김
+            for (int i = 0; i < length; i++) {
+                if (bombs[i] != 0) {
+                    temp[index++] = bombs[i];
                 }
+            }
 
-                if(bombs[i] == bombs[i+1]){
-                    count++;
-                }else if (bombs[i] != bombs[i+1] && count>=m){
-                    end = i;
+            // temp -> bombs 복사
+            for (int i = 0; i < index; i++) {
+                bombs[i] = temp[i];
+            }
+
+            length = index;
+            temp = new int[101];
+
+            // 연속된 숫자 탐색 및 제거
+            int i = 0;
+            while (i < length) {
+                int j = i + 1;
+                while (j < length && bombs[i] == bombs[j]) j++;
+                int count = j - i;
+                if (count >= m) {
+                    for (int k = i; k < j; k++) {
+                        bombs[k] = 0;
+                    }
                     flag = true;
-                    break;
-                }else{
-                    flag = false;
                 }
+                i = j;
             }
-
-            for(int i = 0; i<n; i++){
-                if(i<= end-count || i>end) {
-                    temp[index] = bombs[i];
-                    index++;
-                }
-            }
-            bombs = temp;
         }
 
-        int count = 0;
-
-        for(int i = 0; i<n; i++){
-            if(bombs[i] == 0) break;
-            count++;
+        // 최종 결과 출력
+        int resultLength = 0;
+        for (int i = 0; i < length; i++) {
+            if (bombs[i] != 0) resultLength++;
+            else break;
         }
-        System.out.println(count);
-        for(int i = 0; i<count; i++){
+
+        System.out.println(resultLength);
+        for (int i = 0; i < resultLength; i++) {
             System.out.println(bombs[i]);
         }
     }
