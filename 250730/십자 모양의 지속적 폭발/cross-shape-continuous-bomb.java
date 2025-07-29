@@ -31,22 +31,24 @@ public class Main {
         
 
         for(int j = 0; j<n; j++){
-            if(grid[j][col]==0) continue;
-            int boomRange = grid[j][col]-1;
-            for(int i = 0; i < 4; i++){
-                int x = j;
-                int y = col;
-                for(int k = 0; k<boomRange; k++){
-                    if(isRange(x+dx[i],y+dy[i])){
-                        x +=dx[i];
-                        y +=dy[i];
-                        grid[x][y] = 0;
+            if(grid[j][col] != 0){
+                int boomRange = grid[j][col]-1;
+                for(int i = 0; i < 4; i++){
+                    int x = j;
+                    int y = col;
+                    for(int k = 0; k<boomRange; k++){
+                        if(isRange(x+dx[i],y+dy[i])){
+                            x +=dx[i];
+                            y +=dy[i];
+                            grid[x][y] = 0;
+                        }
                     }
                 }
+                grid[j][col] = 0;
+                grid = shift(grid);
+                
+                break;
             }
-            grid[j][col] = 0;
-            grid = shift(grid);
-           
         }
         
         return grid;
