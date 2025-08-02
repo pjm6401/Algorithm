@@ -10,7 +10,7 @@ public class Main {
         r = sc.nextInt();
         c = sc.nextInt();
         for (int i = 0; i < n; i++) {
-            for (int j = 1; j <= n; j++) {
+            for (int j = 0; j < n; j++) {
                 grid[i][j] = sc.nextInt();
             }
         }
@@ -24,6 +24,7 @@ public class Main {
         int y = c-1;
         int tempX = x;
         int tempY = y;
+        System.out.print(grid[x][y]+" ");
         boolean flag = true;
         while(flag){
             flag = false;
@@ -37,7 +38,7 @@ public class Main {
             if(flag){
                 x = tempX;
                 y = tempY;
-                System.out.print(grid[tempX][tempY]+" ");
+                System.out.print(grid[x][y]+" ");
             }
         }
         
