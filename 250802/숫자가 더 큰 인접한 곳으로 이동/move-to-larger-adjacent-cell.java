@@ -18,8 +18,8 @@ public class Main {
     }
 
     public static void shift(int [][] grid){
-        int [] dx = {0,1,0,-1};
-        int [] dy = {1,0,-1,0};
+        int [] dx = {0,0,1,-1};
+        int [] dy = {1,-1,0,0};
         int x = r-1;
         int y = c-1;
         int tempX = x;
