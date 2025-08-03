@@ -36,6 +36,7 @@ public class Main {
             int count = 0;
             for(int j = startRow; j<=endRow; j++){
                 if(grid[i+1][j] == 1) count ++;
+                if(i+1 == n) count++;
             }
             if(count>0) flagB = true;
             if(flagA && flagB){
