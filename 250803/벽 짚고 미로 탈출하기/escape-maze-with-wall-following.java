@@ -28,7 +28,7 @@ public class Main {
         int dir = 0;
         int wall = calcWall(dir);
         int time = 0;
-
+        int turnCount = 0; 
         while (true){
 
             if(isRange(x+dx[wall], y+dy[wall]) && isEscape(x,y,dir,wall)){
@@ -36,7 +36,7 @@ public class Main {
                 break;
             }
 
-            if(startX == x && startY == y && time>0){
+            if((startX == x && startY == y && time>0) || turnCount >=4){
                 time = -1;
                 break;
             }
@@ -44,6 +44,7 @@ public class Main {
             if(isWall(x,y,dir)){
                 dir = calcDir(dir);
                 wall = calcWall(dir);
+                turnCount ++; 
                 continue;
             }else if(isRange(x+dx[dir], y+dy[dir])){
                 x += dx[dir];
@@ -53,7 +54,9 @@ public class Main {
                     dir = calcDirGo(dir);
                     wall = calcWall(wall);
                 }
+                turnCount = 0; 
             }else{
+                turnCount = 0; 
                 dir = calcDir(dir);
                 wall = calcWall(dir);
                 while(!isRange(x + dx[dir],y + dy[dir])){
