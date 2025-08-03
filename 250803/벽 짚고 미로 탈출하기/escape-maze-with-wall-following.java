@@ -96,7 +96,7 @@ public class Main {
 
     public static boolean canGo(int x, int y,int dir, int wall){
         
-        return (isRange(x+dx[wall], x+dy[wall]) && maze[x+dx[wall]][y+dy[wall]] == '#');
+        return (isRange(x+dx[wall], y+dy[wall]) && maze[x+dx[wall]][y+dy[wall]] == '#');
     }
 
     public static boolean isRange(int x, int y){
