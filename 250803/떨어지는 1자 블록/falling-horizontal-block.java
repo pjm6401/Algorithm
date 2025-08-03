@@ -24,7 +24,6 @@ public class Main {
 
         for(int i = 0; i<n; i++){
             boolean flag = false;
-            boolean flagB = false;
             int count = 0;
             for(int j = startRow; j<=endRow; j++){
                 if(grid[i][j] == 0){
