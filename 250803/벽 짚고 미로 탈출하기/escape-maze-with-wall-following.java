@@ -1,108 +1,79 @@
-import java.util.Scanner;
+import java.util.*;
+
 public class Main {
-    static int [] dx = {0,-1,0,1};
-    static int [] dy = {1,0,-1,0};
-    static int n;
-    static int x;
-    static int y;
-    static char [][] maze = new char [102][102];
+    static int n, x, y;
+    static char[][] maze;
+    static int[] dx = {-1, 0, 1, 0}; // 북, 동, 남, 서
+    static int[] dy = {0, 1, 0, -1};
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        x = sc.nextInt();
-        y = sc.nextInt();
+        x = sc.nextInt() - 1;
+        y = sc.nextInt() - 1;
+        maze = new char[n][n];
         for (int i = 0; i < n; i++) {
             String line = sc.next();
             for (int j = 0; j < n; j++) {
                 maze[i][j] = line.charAt(j);
             }
         }
-        run ();
+        System.out.println(run());
     }
-    public static void run (){
-        x -=1;
-        y -=1;
-        int startX = x;
-        int startY = y;
-        int startDir = 0;
-        int dir = 0;
-        int wall = calcWall(dir);
-        int time = 0;
-        int turnCount = 0; 
-        while (true){
-            
-            // 1번이상 이동을 해서 출발지점으로 돌아온경우 탈출불가
-            // 제자리에서 4번 이상 돌게 될 경우 탈출 불가 
-            if((startX == x && startY == y && time>0) || turnCount >=4){
-                time = -1;
-                break;
-            }
-            
 
-            if(isWall(x,y,dir)){
-                dir = calcDir(dir);
-                wall = calcWall(dir);
-                turnCount ++; 
+    static int run() {
+        int dir = 1; // 처음 동쪽(오른쪽) 바라봄
+        boolean[][][] visited = new boolean[n][n][4];
+        int time = 0;
+
+        while (true) {
+            // 탈출 성공
+            if (!isRange(x, y)) return time;
+
+            // 같은 상태 반복 → 탈출 불가
+            if (visited[x][y][dir]) return -1;
+            visited[x][y][dir] = true;
+
+            int rightDir = (dir + 1) % 4;
+            int nx = x + dx[dir];
+            int ny = y + dy[dir];
+
+            // 1. 바라보는 방향 이동 불가 → 왼쪽 회전
+            if (!canMove(dir)) {
+                dir = (dir + 3) % 4;
                 continue;
-            }else if(isRange(x+dx[dir], y+dy[dir]) && rigthWall(x+dx[dir],y+dy[dir],wall)){
+            }
+
+            // 2. 이동 가능 & 오른쪽 벽 없음 → 이동 후 오른쪽 회전
+            if (!hasWallOnRight()) {
                 x += dx[dir];
                 y += dy[dir];
                 time++;
-                turnCount = 0; 
-            }else if(isRange(x+dx[dir], y+dy[dir]) && !rigthWall(x+dx[dir],y+dy[dir],wall)){
+                dir = (dir + 1) % 4;
+            }
+            // 3. 이동 가능 & 오른쪽에 벽 있음 → 그냥 이동
+            else {
                 x += dx[dir];
                 y += dy[dir];
                 time++;
-                dir = calcDirGo(dir);
-                wall = calcWall(wall);
-                x += dx[dir];
-                y += dy[dir];
-                time++;
-                turnCount = 0; 
-            }else if(isEscape(x,y,dir,wall)){
-                x += dx[dir];
-                y += dy[dir];
-                time++;
-                break;
             }
         }
-
-        System.out.println(time);
     }
 
-    public static int calcWall(int dir){
-        return (dir + 3)%4; 
-    }
-    public static int calcDirGo(int dir){
-        return (dir + 3)%4; 
-    }
-    public static int calcDir(int dir){
-        return (dir + 1)%4;
-    }
-
-    public static boolean isWall(int x, int y, int dir){
+    static boolean canMove(int dir) {
         int nx = x + dx[dir];
         int ny = y + dy[dir];
-        return (isRange(nx, ny) && maze[nx][ny] == '#');
+        return isRange(nx, ny) && maze[nx][ny] != '#';
     }
 
-    public static boolean rigthWall(int x, int y, int wall){
-        int nx = x + dx[wall];
-        int ny = y + dy[wall];
-        return (isRange(nx, ny) && maze[nx][ny] == '#');
+    static boolean hasWallOnRight() {
+        int rightDir = (dir + 1) % 4;
+        int nx = x + dx[rightDir];
+        int ny = y + dy[rightDir];
+        return !(isRange(nx, ny) && maze[nx][ny] != '#');
     }
 
-    public static boolean isEscape(int x, int y,int dir, int wall){
-        return (maze[x+dx[wall]][y+dy[wall]] == '#' && (x+dx[dir]>=n || y+dy[dir]>=n|| x+dx[dir]<0 || y+dy[dir]<0));
-    }
-    
-
-    public static boolean canGo(int x, int y,int dir, int wall){
-        
-        return (isRange(x+dx[wall], y+dy[wall]) && maze[x+dx[wall]][y+dy[wall]] == '#');
-    }
-
-    public static boolean isRange(int x, int y){
-        return (x>=0 && x<n && y>=0 && y<n);
+    static boolean isRange(int nx, int ny) {
+        return nx >= 0 && nx < n && ny >= 0 && ny < n;
     }
 }
