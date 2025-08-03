@@ -23,23 +23,19 @@ public class Main {
         int endRow = startRow+m-1;
 
         for(int i = 0; i<n; i++){
-            boolean flagA = false;
+            boolean flag = false;
             boolean flagB = false;
+            int count = 0;
             for(int j = startRow; j<=endRow; j++){
                 if(grid[i][j] == 0){
-                    flagA = true;
+                    if((grid[i+1][j] == 1 || i+1 == n)) count++;
+                    flag = true;
                 }else{
-                    flagA = false;
+                    flag = false;
                     break;
                 }
             }
-            int count = 0;
-            for(int j = startRow; j<=endRow; j++){
-                if(grid[i+1][j] == 1) count ++;
-                if(i+1 == n) count++;
-            }
-            if(count>0) flagB = true;
-            if(flagA && flagB){
+            if(flag && count>0){
                 for(int j = startRow; j<=endRow; j++){
                     grid[i][j] =1;
                 }
