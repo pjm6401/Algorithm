@@ -30,44 +30,41 @@ public class Main {
         int time = 0;
         int turnCount = 0; 
         while (true){
-
-            if(isRange(x+dx[wall], y+dy[wall]) && isEscape(x,y,dir,wall)){
-                time ++;
-                break;
-            }
-
+            
+            // 1번이상 이동을 해서 출발지점으로 돌아온경우 탈출불가
+            // 제자리에서 4번 이상 돌게 될 경우 탈출 불가 
             if((startX == x && startY == y && time>0) || turnCount >=4){
                 time = -1;
                 break;
             }
+            
 
             if(isWall(x,y,dir)){
                 dir = calcDir(dir);
                 wall = calcWall(dir);
                 turnCount ++; 
                 continue;
-            }else if(isRange(x+dx[dir], y+dy[dir])){
+            }else if(isRange(x+dx[dir], y+dy[dir]) && rigthWall(x+dx[dir],y+dy[dir],wall)){
                 x += dx[dir];
                 y += dy[dir];
                 time++;
-                if(!canGo(x,y,dir,wall)){
-                    dir = calcDirGo(dir);
-                    wall = calcWall(wall);
-                }
                 turnCount = 0; 
-            }else{
-                turnCount = 0; 
-                dir = calcDir(dir);
-                wall = calcWall(dir);
-                while(!isRange(x + dx[dir],y + dy[dir])){
-                    dir = calcDir(dir);
-                    wall = calcWall(dir);
-                }
+            }else if(isRange(x+dx[dir], y+dy[dir]) && !rigthWall(x+dx[dir],y+dy[dir],wall)){
                 x += dx[dir];
                 y += dy[dir];
                 time++;
+                dir = calcDirGo(dir);
+                wall = calcWall(wall);
+                x += dx[dir];
+                y += dy[dir];
+                time++;
+                turnCount = 0; 
+            }else if(isEscape(x,y,dir,wall)){
+                x += dx[dir];
+                y += dy[dir];
+                time++;
+                break;
             }
-            
         }
 
         System.out.println(time);
@@ -86,6 +83,12 @@ public class Main {
     public static boolean isWall(int x, int y, int dir){
         int nx = x + dx[dir];
         int ny = y + dy[dir];
+        return (isRange(nx, ny) && maze[nx][ny] == '#');
+    }
+
+    public static boolean rigthWall(int x, int y, int wall){
+        int nx = x + dx[wall];
+        int ny = y + dy[wall];
         return (isRange(nx, ny) && maze[nx][ny] == '#');
     }
 
