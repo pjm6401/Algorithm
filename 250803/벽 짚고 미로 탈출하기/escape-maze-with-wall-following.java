@@ -32,12 +32,7 @@ public class Main {
         int time = 0;
 
         while (true) {
-            // 탈출 성공
-            if (!isRange(x, y)) {
-                break;
-            }
-
-            // 같은 상태 재방문 → 탈출 불가
+             // 같은 상태 재방문 → 탈출 불가
             if (visited[x][y][dir]) {
                 time = -1;
                 break;
