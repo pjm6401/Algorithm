@@ -40,7 +40,7 @@ public class Main {
         boolean [][] visit = new boolean[n][n];
         Deque<state> dq = new ArrayDeque<>();
         state start = new state(startX,startY);
-        dq.push(start);
+        dq.offer(start);
 
         for (int i = 0; i < k; i++) {
             char d = sc.next().charAt(0);
@@ -51,17 +51,19 @@ public class Main {
                 int nx = startX+dx[dir];
                 int ny = startY+dy[dir];
                 time++;
-                if(isRange(nx,ny) && !visit[nx][ny]){
+                if(isRange(nx,ny) && (!visit[nx][ny] || nextVisit(nx,ny,dq.peek()) )){
                     startX = nx;
                     startY = ny;
+                    
                     if(grid[nx][ny] == 1){
                         visit[nx][ny] = true;
                         state newState = new state(nx,ny);
+                        dq.offer(newState);
                     }else{
                         visit[nx][ny] = true;
                         state newState = new state(nx,ny);
-                        dq.push(newState);
-                        state oldState = dq.pop();
+                        dq.offer(newState);
+                        state oldState = dq.poll();
                         visit[oldState.getX()][oldState.getY()] = false;
                     }
                 }else{
@@ -86,5 +88,9 @@ public class Main {
 
     public static boolean isRange(int x, int y){
         return (x>=0 && x<n && y>=0 && y<n);
+    }
+
+    public static boolean nextVisit(int x, int y, state state){
+        return (x == state.getX() && y == state.getY());
     }
 }
