@@ -9,6 +9,7 @@ public class Main {
     static ArrayList<state> list = new ArrayList<>();
     static int [] dx = {0,1,1,1,0,-1,-1,-1};
     static int [] dy = {1,1,0,-1,-1,-1,0,1};
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -43,48 +44,56 @@ public class Main {
     }
 
     public static int calcBoom(){
+        int [][] temp = copyGird();
+
+        for(int i = 0; i<boomList.size(); i++){
+            state state = boomList.get(i);
+            temp = boomResult(temp,state.getX(),state.getY(),state.getBoom());
+        }
+
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(temp[i][j] == -1) ans ++;
+            }
+        }
+        return ans;
+    }
+
+    public static boolean isRange(int x, int y){
+        return (x>=0 && x<n && y>=0 && y<n);
+    }
+
+    public static int [][] boomResult (int [][] temp,int x, int y, int boomState){
+        temp[x][y] = -1;
+        if(boomState == 1){
+            for(int j = x-2; j<=x+2;j++){
+                if(isRange(j,y)) temp[j][y] = -1;
+            }
+        }else if(boomState == 2){
+            for(int j = 0; j<8;j++){
+                if(isRange(x+dx[j],y+dy[j]) && j%2==0){
+                    temp[x+dx[j]][y+dy[j]] = -1;
+                }
+            }
+        }else if(boomState == 3){
+            for(int j = 0; j<8;j++){
+                if(isRange(x+dx[j],y+dy[j]) && j%2==1){
+                    temp[x+dx[j]][y+dy[j]] = -1;
+                }
+            }
+        }
+        return temp;
+    }
+
+    public static int [][] copyGird(){
         int [][] temp = new int [n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 temp[i][j] = grid[i][j];
             }
         }
-        for(int i = 0; i<boomList.size(); i++){
-            state state = boomList.get(i);
-            int boomState = state.getBoom();
-            int x = state.getX();
-            int y = state.getY();
-            temp[x][y] = -1;
-            if(boomState == 1){
-                for(int j = x-2; j<=x+2;j++){
-                    if(isRange(j,y)) temp[j][y] = -1;
-                }
-            }else if(boomState == 2){
-                for(int j = 0; j<8;j++){
-                    if(isRange(x+dx[j],y+dy[j]) && j%2==0){
-                        temp[x+dx[j]][y+dy[j]] = -1;
-                    }
-                }
-            }else if(boomState == 3){
-                for(int j = 0; j<8;j++){
-                    if(isRange(x+dx[j],y+dy[j]) && j%2==1){
-                        temp[x+dx[j]][y+dy[j]] = -1;
-                    }
-                }
-            }
-        }
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                //System.out.print(temp[i][j]+" ");
-                if(temp[i][j] == -1) ans ++;
-            }
-            //System.out.println();
-        }
-        return ans;
-    }
-    public static boolean isRange(int x, int y){
-        return (x>=0 && x<n && y>=0 && y<n);
+        return temp;
     }
 }
 
