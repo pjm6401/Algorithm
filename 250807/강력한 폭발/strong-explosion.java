@@ -33,7 +33,8 @@ public class Main {
             max = Math.max(max,result);
             return;
         }
-
+        int estimatedMax = calcBoom() + (boomCnt - cnt) * 5;
+        if(estimatedMax <= max) return;  // 가지치기
         for(int i =1; i<=3; i++){
             state state = list.get(cnt);
             state.setBoom(i);
