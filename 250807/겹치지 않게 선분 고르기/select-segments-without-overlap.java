@@ -3,76 +3,64 @@ import java.util.*;
 public class Main {
 
     static ArrayList<Line> lines = new ArrayList<>();
-    static ArrayList<Line> anslines = new ArrayList<>();
-    static int lineSize = 0;
-    static int lineSizeTemp = 0;
-    
+    static ArrayList<Line> selected = new ArrayList<>();
     static int max = 0;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[][] segments = new int[n][2];
+
         for (int i = 0; i < n; i++) {
             int start = sc.nextInt();
             int end = sc.nextInt();
-            Line line = new Line(start,end);
-            lines.add(line);
+            lines.add(new Line(start, end));
         }
 
-        lineSize = lines.size();
-        lineSizeTemp = lineSize;
+        // 정렬(선택 순서에 영향은 없지만 가지치기 최적화에 도움 됨)
+        lines.sort(Comparator.comparingInt(line -> line.start));
 
-        calc(0);
-
+        backtrack(0);
         System.out.println(max);
     }
 
-    public static void calc(int cnt){
-        if(cnt == lineSize){
-            int ans = countLine();
-            max = Math.max(max,ans);
+    // 백트래킹으로 모든 조합 탐색
+    public static void backtrack(int idx) {
+        if (idx == lines.size()) {
+            if (isValid()) {
+                max = Math.max(max, selected.size());
+            }
             return;
         }
-        int tempCount = countLine() + lineSize - cnt;
-        if(max>=tempCount) return;
-        for(int i = cnt; i<lineSize; i++){
-            Line line = lines.get(cnt);
-            anslines.add(line);
-            calc(cnt + 1);
-            anslines.remove(anslines.size()-1);
-        }
+
+        // 현재 선분을 선택하는 경우
+        selected.add(lines.get(idx));
+        backtrack(idx + 1);
+        selected.remove(selected.size() - 1);
+
+        // 선택하지 않는 경우
+        backtrack(idx + 1);
     }
-    public static int countLine(){
-        int max = 0;
-        for(int i = 0; i<anslines.size(); i++){
-            Line line = lines.get(i);
-            int ans = 1;
-            for(int j = 0; j<anslines.size(); j++){
-                if(i!=j){
-                    Line lineTemp = lines.get(j);
-                    if(lineTemp.getEnd()<line.getStart() || lineTemp.getStart() > line.getEnd()){
-                        ans++;
-                    }
+
+    // 현재 selected 리스트의 모든 선분이 서로 겹치지 않는지 확인
+    public static boolean isValid() {
+        for (int i = 0; i < selected.size(); i++) {
+            for (int j = i + 1; j < selected.size(); j++) {
+                Line a = selected.get(i);
+                Line b = selected.get(j);
+                // 겹치는 조건: !(a.end < b.start || b.end < a.start)
+                if (!(a.end < b.start || b.end < a.start)) {
+                    return false; // 겹치는 경우
                 }
             }
-            max = Math.max(max,ans);
         }
-        return max;
-    }
-}
-
-class Line {
-    int start;
-    int end;
-    public Line(int start, int end){
-        this.start = start;
-        this.end = end;
+        return true;
     }
 
-    public int getStart(){
-        return start;
-    }
-    public int getEnd(){
-        return end;
+    static class Line {
+        int start, end;
+        public Line(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
     }
 }
