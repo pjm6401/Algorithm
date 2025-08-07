@@ -56,8 +56,8 @@ public class Main {
             int y = state.getY();
             temp[x][y] = -1;
             if(boomState == 1){
-                for(int j = 0; j<n;j++){
-                    temp[j][y] = -1;
+                for(int j = x-2; j<=x+2;j++){
+                    if(isRange(j,y)) temp[j][y] = -1;
                 }
             }else if(boomState == 2){
                 for(int j = 0; j<8;j++){
