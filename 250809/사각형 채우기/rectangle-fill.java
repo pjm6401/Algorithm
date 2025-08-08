@@ -18,7 +18,7 @@ public class Main {
         for (int i = 3; i <= n; i++) {
             // 문제에 따라 결과값을 특정 수로 나눈 나머지를 요구할 수 있습니다.
             // 예: dp[i] = (dp[i - 1] + dp[i - 2]) % 10007;
-            dp[i] = dp[i - 1] + dp[i - 2];
+            dp[i] = dp[i - 1] + dp[i - 2]  % 10007 ;
         }
 
         System.out.println(dp[n]);
