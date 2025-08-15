@@ -28,7 +28,7 @@ public class Main {
         c2 = sc.nextInt() - 1;
 
         // 조합을 찾기 위한 재귀 함수 호출
-        selectWall(0, 0);
+        selectWall(0);
 
         // 만약 min 값이 초기값 그대로라면, 어떤 조합으로도 경로를 찾지 못한 것
         if (min == 10001) {
@@ -43,7 +43,7 @@ public class Main {
      * @param cnt 현재까지 선택한 벽의 개수
      * @param start 이번 선택을 시작할 list의 인덱스
      */
-    public static void selectWall(int cnt, int start) {
+    public static void selectWall(int cnt) {
         // k개의 벽을 모두 선택했다면 BFS 실행
         if (selectedList.size() == k) {
             int ans = BFS();
@@ -56,7 +56,7 @@ public class Main {
         // 조합 생성을 위해 다음 탐색은 현재 인덱스(i) 다음부터 시작하도록 i + 1을 넘겨줌
         for (int i = start; i < list.size(); i++) {
             selectedList.add(list.get(i));
-            selectWall(cnt + 1, i + 1);
+            selectWall(cnt + 1);
             selectedList.remove(selectedList.size() - 1);
         }
     }
