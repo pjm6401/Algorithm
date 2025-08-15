@@ -42,7 +42,7 @@ public class Main {
             if (ans != -1) {
                 min = Math.min(min, ans);
             }
-            
+            step = new int [100][100];
             return;
         }
 
