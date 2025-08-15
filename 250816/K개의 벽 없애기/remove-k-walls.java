@@ -15,7 +15,7 @@ public class Main {
     static Deque<int []> dq = new ArrayDeque<>();
     static ArrayList<int []> list = new ArrayList<>();
     static ArrayList<int []> selectedList = new ArrayList<>();
-
+    static int [][] step = new int [100][100];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -40,7 +40,7 @@ public class Main {
             int ans = BFS(selectedList);
 
             if (ans != -1) {
-                min = Math.min(min, ans-1);
+                min = Math.min(min, ans);
             }
             
             return;
@@ -62,7 +62,7 @@ public class Main {
 
         dq.add(new int[]{startX,startY});
         visit[startX][startY] = true;
-        int ans = 0;
+        step[startX][startX] = 0;
 
         while(!dq.isEmpty()){
             int [] arr = dq.poll();
@@ -70,9 +70,8 @@ public class Main {
             int y = arr[1];
 
             if(x == r2 && y == c2){
-                return ans;
+                return step[x][y];
             }
-            ans ++;
 
             for(int i = 0; i<4; i++){
                 int nx = x+dx[i];
@@ -80,6 +79,7 @@ public class Main {
                 if(isRange(nx,ny) && temp[nx][ny] == 0){
                     visit[nx][ny] = true;
                     dq.add(new int [] {nx,ny});
+                    step[nx][ny] = step[x][y]+1;
                 }
             }
         }
