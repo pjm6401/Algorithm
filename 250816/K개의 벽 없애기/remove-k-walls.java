@@ -54,7 +54,7 @@ public class Main {
         }
 
         // 조합 생성을 위해 다음 탐색은 현재 인덱스(i) 다음부터 시작하도록 i + 1을 넘겨줌
-        for (int i = start; i < list.size(); i++) {
+        for (int i = cnt; i < list.size(); i++) {
             selectedList.add(list.get(i));
             selectWall(cnt + 1);
             selectedList.remove(selectedList.size() - 1);
