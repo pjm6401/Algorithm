@@ -1,7 +1,7 @@
 import java.util.*;
 public class Main {
     static List<Integer> list = new ArrayList<>();
-    static int ans = 0;
+    static int ans = Integer.MIN_VALUE;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String expression = sc.next();
