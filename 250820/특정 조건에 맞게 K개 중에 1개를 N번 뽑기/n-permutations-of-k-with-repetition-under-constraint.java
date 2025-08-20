@@ -25,7 +25,7 @@ public class Main {
 
         for(int i = 1; i<=k; i++){
 
-            if(list.size()>=2 && list.get(list.size()-1) == i && list.get(list.size()-1) == list.get(list.size()-2)) continue;
+            if(list.size()>=2 && list.get(list.size()-1) == i && i == list.get(list.size()-2)) continue;
             list.add(i);
             backTracking(cnt+1);
             list.remove(list.size()-1);
