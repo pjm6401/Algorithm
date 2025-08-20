@@ -1,55 +1,58 @@
-import java.util.*;
+import java.util.Scanner;
+
 public class Main {
+    public static final int MAX_K = 4;
+    public static final int MAX_N = 12;
     
-    static int n;
-    static int m;
-    static int k;
-    static List<Integer> list = new ArrayList<>();
-    static int max = 0;
-    static int [] mal = new int[101];
+    public static int n, m, k;
+    public static int[] nums = new int[MAX_N];
+    public static int[] pieces = new int[MAX_K];
+    
+    public static int ans;
+    
+    // 점수를 계산합니다.
+    public static int calc() {
+        int score = 0;
+        for(int i = 0; i < k; i++)
+            score += (pieces[i] >= m ? 1 : 0);
+        
+        return score;
+    }
+    
+    public static void findMax(int cnt) {
+        // 말을 직접 n번 움직이지 않아도
+        // 최대가 될 수 있으므로 항상 답을 갱신합니다.
+        ans = Math.max(ans, calc());
+        
+        // 더 이상 움직일 수 없으면 종료합니다.
+        if(cnt == n) 
+            return;
+        
+        for(int i = 0; i < k; i++) {
+            // 움직여서 더 이득이 되지 않는
+            // 말은 더 이상 움직이지 않습니다.
+            if(pieces[i] >= m)
+                continue;
+            
+            pieces[i] += nums[cnt];
+            findMax(cnt + 1);
+            pieces[i] -= nums[cnt];
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
         k = sc.nextInt();
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++)
             nums[i] = sc.nextInt();
-        }
-        Arrays.fill(mal,1);
-        backTraking(0,nums);
-
-        System.out.println(max);
-    }
-
-    public static void backTraking(int cnt,int [] nums){
-        if(cnt == n){
-            int ans = 0;
-            for(int i=0;i<n;i++){
-                mal[list.get(i)] += nums[i];
-            }
-            for(int i=1;i<=m;i++){
-                if(mal[i]>=m) ans++;
-            }
-            max = Math.max(max, ans);
-            Arrays.fill(mal,1);
-            return;
-        }
-
-        for(int i = 1; i<=k;i++){
-            list.add(i);
-            backTraking(cnt+1,nums);
-            list.remove(list.size()-1);
-        }
-    }
-
-    public static int[] newArr(){
-        int [] temp = new int [m+1];
-
-        for(int i = 1; i<=m; i++){
-            temp[i] = 1;
-        }
-
-        return temp;
+        
+        for(int i = 0; i < k; i++)
+            pieces[i] = 1;
+        
+        findMax(0);
+        
+        System.out.print(ans);
     }
 }
