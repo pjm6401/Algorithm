@@ -2,46 +2,44 @@ import java.util.*;
 
 public class Main {
 
-    static String min = null; // 최소 문자열
     static int n;
     static List<Integer> list = new ArrayList<>();
+    static int[] numbers = {4,5,6};
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
-        b(0);
-        System.out.println(min);
+        dfs(0);
     }
 
-    public static void b(int cnt){
+    public static void dfs(int cnt){
         if(cnt == n){
-            
-            StringBuilder sb = new StringBuilder();
-            for (int num : list) sb.append(num);
-
-            if(isArr(sb.toString()))  if(min == null || sb.toString().compareTo(min) < 0){
-                    min = sb.toString();
-                }
-            
-
-            return;
+            // 조건 만족 시 즉시 출력 후 종료
+            for(int num : list) System.out.print(num);
+            System.exit(0);
         }
 
-        for(int i =4; i<=6; i++){
-            if(list.size()>0 && list.get(list.size()-1)==i) continue;
+        for(int i = 0; i < numbers.length; i++){
+            if(list.size() > 0 && list.get(list.size()-1) == numbers[i]) continue;
 
-            list.add(i);
-            b(cnt + 1);
+            list.add(numbers[i]);
+            if(isValid()) dfs(cnt + 1);
             list.remove(list.size()-1);
         }
     }
 
-    public static boolean isArr(String num){
-       for(int i = 2; i <= list.size()/2; i++){
-            for(int j = 0; j + i + i <= list.size(); j++){
-                String a = num.substring(j, j+i);
-                String b = num.substring(j+i, j+i+i);
-                if(a.equals(b)) return false;
+    // 연속 부분 수열이 반복되는지 체크
+    public static boolean isValid(){
+        int size = list.size();
+        for(int len = 1; len <= size/2; len++){
+            boolean flag = true;
+            for(int j = 0; j < len; j++){
+                if(!list.get(size - len + j).equals(list.get(size - 2*len + j))){
+                    flag = false;
+                    break;
+                }
             }
+            if(flag) return false;
         }
         return true;
     }
