@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
 
-    static long min = Long.MAX_VALUE;
+    static String min = null; // 최소 문자열
     static int n;
     static List<Integer> list = new ArrayList<>();
     public static void main(String[] args) {
@@ -17,9 +17,10 @@ public class Main {
             
             StringBuilder sb = new StringBuilder();
             for (int num : list) sb.append(num);
-            long k = Long.parseLong(sb.toString());
 
-            if(isArr(sb.toString())) min = Math.min(min, k); // min도 long으로 선언 필요
+            if(isArr(sb.toString()))  if(min == null || sb.toString().compareTo(min) < 0){
+                    min = sb.toString();
+                }
             
 
             return;
