@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
 
-    static int min = Integer.MAX_VALUE;
+    static int min = Long.MAX_VALUE;
     static int n;
     static List<Integer> list = new ArrayList<>();
     public static void main(String[] args) {
@@ -17,8 +17,9 @@ public class Main {
             
             StringBuilder sb = new StringBuilder();
             for (int num : list) sb.append(num);
-            int k = Integer.parseInt(sb.toString());
-            if(isArr(sb.toString())) min = Math.min(min,k);
+            long k = Long.parseLong(sb.toString());
+
+            if(isArr(sb.toString())) min = Math.min(min, k); // min도 long으로 선언 필요
             
 
             return;
