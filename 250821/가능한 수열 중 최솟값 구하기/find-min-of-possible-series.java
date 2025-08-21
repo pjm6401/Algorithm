@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
 
-    static int min = Long.MAX_VALUE;
+    static long min = Long.MAX_VALUE;
     static int n;
     static List<Integer> list = new ArrayList<>();
     public static void main(String[] args) {
