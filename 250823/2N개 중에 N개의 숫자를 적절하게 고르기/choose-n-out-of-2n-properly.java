@@ -24,11 +24,10 @@ public class Main {
     public static void choice(int cnt,int index){
         if(cnt == n){
             int a = 0;
-
+            
             for(int i = 0; i<n; i++){
                 a+=arr[list.get(i)];
             }
-
             int b = sum - a;
             
             int result = Math.abs(a-b);
@@ -40,12 +39,8 @@ public class Main {
 
         for(int i = index; i<2*n; i++){
             list.add(i);
-            choice(cnt+1, index+1);
+            choice(cnt+1, i+1);
             list.remove(list.size()-1);
         }
-    }
-
-    public static void choiceAnother(int cnt){
-
     }
 }
