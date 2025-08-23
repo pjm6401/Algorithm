@@ -19,20 +19,21 @@ public class Main {
         }
         
         choice(0,0);
-        System.out.println((int)(min*min));
+        System.out.println((int)(min));
     }
 
     public static void choice(int cnt, int index){
         if(cnt == m){
             double max = 0;
-
-            for(int i = 0; i<list.size()-1; i++){
-                for(int j = i+1; j<list.size(); j++){
-                    max = Math.max(max,calc(list.get(i)[0],list.get(i)[1],list.get(j)[0],list.get(j)[1]));
+            for (int i = 0; i < list.size() - 1; i++) {
+                for (int j = i + 1; j < list.size(); j++) {
+                    max = Math.max(max, calcSquared(
+                            list.get(i)[0], list.get(i)[1],
+                            list.get(j)[0], list.get(j)[1]
+                    ));
                 }
             }
-
-            min = Math.min(min,max);
+            min = Math.min(min, max);
             return;
         }
 
@@ -44,9 +45,9 @@ public class Main {
 
     }
 
-    public static double calc(int x1, int y1, int x2, int y2) {
+    public static double calcSquared(int x1, int y1, int x2, int y2) {
         double dx = x1 - x2;
         double dy = y1 - y2;
-        return Math.sqrt(dx * dx + dy * dy);
+        return dx * dx + dy * dy; // 제곱근 안 씀
     }
 }
