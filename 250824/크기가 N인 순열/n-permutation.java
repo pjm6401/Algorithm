@@ -20,7 +20,7 @@ public class Main {
             
             return;
         }
-        if(isArr()){
+        if(!isArr()){
             return;
         }
         for(int i = 1; i<=n; i++){
