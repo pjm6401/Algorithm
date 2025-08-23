@@ -12,15 +12,17 @@ public class Main {
 
     public static void choice(int cnt){
         if(cnt == n){
-            if(isArr()){
+            
                 for(int i = 0; i<list.size(); i++){
                     System.out.print(list.get(i) +" ");
                 }
                 System.out.println();
-            }
+            
             return;
         }
-
+        if(isArr()){
+            return;
+        }
         for(int i = 1; i<=n; i++){
             list.add(i);
             choice(cnt+1);
