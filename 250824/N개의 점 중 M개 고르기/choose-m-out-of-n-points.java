@@ -44,12 +44,9 @@ public class Main {
 
     }
 
-    public static double calc(int x1,int y1, int x2, int y2){
-        double x = Math.pow(x1-x2,2);
-        double y = Math.pow(y1-y2,2);
-
-        double result = Math.sqrt(x+y);
-
-        return result;
+    public static double calc(int x1, int y1, int x2, int y2) {
+        double dx = x1 - x2;
+        double dy = y1 - y2;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 }
