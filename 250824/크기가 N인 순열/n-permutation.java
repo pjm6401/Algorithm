@@ -3,7 +3,7 @@ public class Main {
 
     static int n;
     static List<Integer> list = new ArrayList<>();
-    static int [] grid = new int [9];
+    static boolean [] visit = new boolean[9];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
@@ -20,27 +20,15 @@ public class Main {
             
             return;
         }
-        if(!isArr()){
-            return;
-        }
+
         for(int i = 1; i<=n; i++){
+            if(visit[i]) continue;
+            visit[i] = true;
             list.add(i);
             choice(cnt+1);
             list.remove(list.size()-1);
+            visit[i] = false;
         }
     }
-
-
-    public static boolean isArr(){
-        grid = new int [n+1];
-        for(int i = 0; i<list.size(); i++){
-            grid[list.get(i)]++;
-
-            if( grid[list.get(i)] > 1){
-                return false;
-            }
-        }
-        return true;
-    } 
 
 }
