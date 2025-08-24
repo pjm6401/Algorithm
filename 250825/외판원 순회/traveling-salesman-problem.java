@@ -1,73 +1,75 @@
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
-    // INF 값은 (최대 도시 수 * 최대 비용) 보다 큰 값으로 설정해야 합니다.
-    static final int INF = 16 * 1_000_000 + 1; 
-    static int n;
-    static int[][] cost;
-    static int[][] dp;
-    static int ALL_VISITED;
-
-    public static void main(String[] args) {
-        //--- 입력 처리 시작 ---//
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-
-        cost = new int[n][n];
-        dp = new int[n][1 << n];
-        ALL_VISITED = (1 << n) - 1;
-
-        for (int i = 0; i < n; i++) {
-            Arrays.fill(dp[i], -1); // -1로 초기화하여 0 비용과 구분 (INF로도 가능)
-        }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                cost[i][j] = sc.nextInt();
+    public static final int INT_MAX = Integer.MAX_VALUE;
+    public static final int MAX_N = 10;
+    
+    // 변수 선언
+    public static int n;
+    public static int[][] cost = new int[MAX_N][MAX_N];
+    public static boolean[] visited = new boolean[MAX_N];
+    public static ArrayList<Integer> picked = new ArrayList<>();
+    
+    public static int ans = INT_MAX;
+    
+    // 지금까지 방문한 지점의 수를 cnt라 했을 때
+    // 계속 탐색을 이어서 진행합니다.
+    public static void findMin(int cnt) {
+        // 모든 지점를 방문했을 때
+        // 가능한 지금까지의 비용 합 중
+        // 최솟값을 갱신합니다.
+        if(cnt == n) {
+            int totalCost = 0;
+            for(int i = 0; i < picked.size() - 1; i++) {
+                int currCost = cost[picked.get(i)][picked.get(i + 1)];
+                // 만약 비용이 0이라면 불가능한 경우이므로 
+                // 바로 함수를 빠져나옵니다.
+                if(currCost == 0)
+                    return;
+                
+                totalCost += currCost;
             }
+    
+            // 최종적으로 1번 지점으로 다시 돌아오는 것 까지 고려해서 계산해줍니다.
+            int lastPos = picked.get(picked.size() - 1);
+            int additionalCost = cost[lastPos][0];
+            if(additionalCost == 0)
+                return;
+    
+            // 답을 갱신해줍니다.
+            ans = Math.min(ans, totalCost + additionalCost);
+            return;
         }
-        sc.close();
-        //--- 입력 처리 끝 ---//
-
-        int result = tsp(0, 1); // 0번 도시에서 시작, 방문 상태는 0번만(mask: 1)
-        System.out.println(result);
+    
+        // 방문할 지점을 선택합니다.
+        for(int i = 0; i < n; i++) {
+            if(visited[i]) continue;
+            visited[i] = true;
+            picked.add(i);
+    
+            findMin(cnt + 1);
+    
+            visited[i] = false;
+            picked.remove(picked.size() - 1);
+        }
     }
 
-    /**
-     * @param current 현재 방문 중인 도시
-     * @param visitedMask 현재까지 방문한 도시들의 집합 (비트마스크)
-     * @return 남은 도시들을 방문하고 출발점으로 돌아오는 최소 비용
-     */
-    static int tsp(int current, int visitedMask) {
-        // 1. 모든 도시를 방문 완료한 경우
-        if (visitedMask == ALL_VISITED) {
-            // 출발점(0번)으로 돌아가는 경로가 없으면 무효한 경로
-            if (cost[current][0] == 0) {
-                return INF;
-            }
-            // 출발점으로 돌아가는 비용 반환
-            return cost[current][0];
-        }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // 입력:
+        n = sc.nextInt();
 
-        // 2. 이미 계산된 상태라면 저장된 값을 반환 (Memoization)
-        if (dp[current][visitedMask] != -1) {
-            return dp[current][visitedMask];
-        }
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                cost[i][j] = sc.nextInt();
 
-        // 3. 현재 상태에서 다음 도시로 이동하는 모든 경우를 탐색
-        dp[current][visitedMask] = INF; // 현재 경로의 최소 비용을 INF로 초기화
-        for (int next = 0; next < n; next++) {
-            // 만약 next 도시를 아직 방문하지 않았고, 길이 있다면
-            if ((visitedMask & (1 << next)) == 0 && cost[current][next] != 0) {
-                // 다음 상태로 재귀 호출하고, 그 결과에 현재 이동 비용을 더함
-                int newCost = cost[current][next] + tsp(next, visitedMask | (1 << next));
-                
-                // 기존 최소 비용과 새로 계산된 비용을 비교하여 갱신
-                dp[current][visitedMask] = Math.min(dp[current][visitedMask], newCost);
-            }
-        }
+        // 1번 지점을 시작으로
+        // 탐색을 진행합니다.
+        visited[0] = true;
+        picked.add(0);
+        findMin(1);
 
-        return dp[current][visitedMask];
+        System.out.print(ans);
     }
 }
