@@ -27,6 +27,7 @@ public class Main {
             list.add(1);
             int result = 0;
             for(int i = 0; i < list.size()-1; i++){
+                if(cost[list.get(i)][list.get(i+1)]==0) return;
                 result+=cost[list.get(i)][list.get(i+1)];
             }
             min = Math.min(result,min);
