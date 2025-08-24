@@ -29,14 +29,13 @@ public class Main {
             for(int i = 0; i < list.size()-1; i++){
                 result+=cost[list.get(i)][list.get(i+1)];
             }
-
             min = Math.min(result,min);
             list.remove(list.size()-1);
             return;
         }
 
         for(int i = 2; i<=n; i++){
-            if(visit[i]) continue;
+            if(visit[i] || (list.size()>0 && cost[list.get(list.size()-1)][i] ==0) ) continue;
             list.add(i);
             visit[i] = true;
             choice(cnt+1);
