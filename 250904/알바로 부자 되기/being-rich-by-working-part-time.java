@@ -43,7 +43,7 @@ public class Main {
             for(int j = 0; j<i;j++){
                 int end = times[j].end;
                 if (start > end){
-                    dp[j] = Math.max(dp[j] , dp[i] + times[j].pay);
+                    dp[i] = Math.max(dp[i], dp[j] + times[i].pay);
                 }
             }
         }
