@@ -23,11 +23,7 @@ public class Main {
 
     public static void dfs(int x, int y){
         if(x == n-1 || y == m-1){
-            for(int i = 1; i<n; i++){
-                for(int j = 1; j<m; j++){
-                    ans = Math.max(dp[i][j],ans);
-                }
-            }
+            
             return;
         }
 
@@ -35,15 +31,10 @@ public class Main {
             for(int j = y+1; j<m; j++){
                 if(grid[i][j]>grid[x][y]){
                     dp[i][j] = Math.max(dp[i][j], dp[x][y]+1);
+                    ans = Math.max(dp[i][j],ans);
                     dfs(i,j);
                 }
             }
         }
-
-        
-    }
-
-    public static boolean isRange(int x, int y){
-        return (x>=0 && x<n && y<m && y>=0);
     }
 }
