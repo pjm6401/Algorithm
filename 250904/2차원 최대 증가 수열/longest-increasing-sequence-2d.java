@@ -30,7 +30,7 @@ public class Main {
         for(int i = x+1; i<n; i++){
             for(int j = y+1; j<m; j++){
                 if(grid[i][j]>grid[x][y]){
-                    dp[i][j] = Math.max(dp[i][j], dp[x][y]+1);
+                    dp[i][j] = dp[x][y]+1;
                     ans = Math.max(dp[i][j],ans);
                     dfs(i,j);
                 }
