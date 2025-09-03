@@ -16,25 +16,24 @@ public class Main {
                 grid[i][j] = sc.nextInt();
         
         dp = new int [n][m];
-        dp[0][0] = 1; 
-        dfs(0,0);
+        ans = 0;
+        ans = Math.max(ans,dfs(0,0));
+        
         System.out.println(ans);
     }
 
-    public static void dfs(int x, int y){
-        if(x == n-1 || y == m-1){
-            
-            return;
-        }
+    public static int dfs(int x, int y) {
+        if (dp[x][y] != 0) return dp[x][y]; // 이미 계산된 값이면 반환
 
-        for(int i = x+1; i<n; i++){
-            for(int j = y+1; j<m; j++){
-                if(grid[i][j]>grid[x][y]){
-                    dp[i][j] = dp[x][y]+1;
-                    ans = Math.max(dp[i][j],ans);
-                    dfs(i,j);
+        int maxLen = 1; // 자기 자신 포함
+        for (int i = x + 1; i < n; i++) {
+            for (int j = y + 1; j < m; j++) {
+                if (grid[i][j] > grid[x][y]) {
+                    maxLen = Math.max(maxLen, 1 + dfs(i, j));
                 }
             }
         }
+        dp[x][y] = maxLen; // 메모이제이션
+        return dp[x][y];
     }
 }
