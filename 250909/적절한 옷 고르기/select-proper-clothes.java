@@ -1,43 +1,53 @@
-import java.util.Scanner;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        int[] s = new int[n];
-        int[] e = new int[n];
-        int[] v = new int[n];
-        for (int i = 0; i < n; i++) {
+
+        int N = sc.nextInt(); // 옷 개수
+        int M = sc.nextInt(); // 총 일수
+
+        int[] s = new int[N];
+        int[] e = new int[N];
+        int[] v = new int[N];
+
+        for (int i = 0; i < N; i++) {
             s[i] = sc.nextInt();
             e[i] = sc.nextInt();
             v[i] = sc.nextInt();
         }
-        int [] dp = new int [m+1];
-        int [] dpNum = new int [m+1];
-        for(int i = 0; i<m; i++){
-            dp[i] = Integer.MIN_VALUE;
+
+        // dp[day][i] = day일에 i번 옷을 입었을 때의 최대 만족도
+        int[][] dp = new int[M + 1][N];
+        for (int[] row : dp) Arrays.fill(row, -1);
+
+        // 초기화: 첫날 입을 수 있는 옷이면 dp[1][i] = 0
+        for (int i = 0; i < N; i++) {
+            if (s[i] <= 1 && 1 <= e[i]) {
+                dp[1][i] = 0;
+            }
         }
 
-        for(int i = 0; i<n; i++){
-            if(s[i] == 1){
-                dpNum[0] = v[i];
-                for(int j = 1; j<m; j++){
-                    for(int k = 0; k<n; k++){
-                        if(s[k]<=j && e[k]>=j){
-                            if(Math.abs(dpNum[j-1]-v[k]) > dp[j]){
-                                dpNum[j] = v[k];
-                                dp[j] = Math.abs(dpNum[j-1]-v[k]);
-                            }
+        // 점화식
+        for (int day = 2; day <= M; day++) {
+            for (int i = 0; i < N; i++) {
+                if (s[i] <= day && day <= e[i]) { // i번 옷이 day에 입을 수 있을 때
+                    for (int j = 0; j < N; j++) {
+                        if (dp[day - 1][j] != -1 && s[j] <= day - 1 && day - 1 <= e[j]) {
+                            dp[day][i] = Math.max(dp[day][i],
+                                    dp[day - 1][j] + Math.abs(v[i] - v[j]));
                         }
-                    } 
+                    }
                 }
             }
         }
-        int sum = 0;
-        for(int i : dp){
-            if(i>0) sum+=i;
-            
+
+        // 정답: M일에 가능한 모든 옷 중 최대값
+        int answer = 0;
+        for (int i = 0; i < N; i++) {
+            answer = Math.max(answer, dp[M][i]);
         }
-        System.out.println(sum);
+
+        System.out.println(answer);
     }
 }
