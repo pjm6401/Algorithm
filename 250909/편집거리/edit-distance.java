@@ -17,7 +17,7 @@ public class Main {
                 }
             }
         }
-
+        if(dp[n][m] ==0) dp[n][m] = 1;
         System.out.println(n-dp[n][m]+1);
     }
 }
