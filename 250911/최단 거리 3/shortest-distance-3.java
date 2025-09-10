@@ -38,10 +38,13 @@ public class Main {
 
             for(int j = 1; j<=n; j++){
                 if(graph[minIdx][j] != 0) dist[j] = Math.min(dist[j] , dist[minIdx]+graph[minIdx][j]);
-                if(graph[j][minIdx] != 0) dist[j] = Math.min(dist[j] , dist[minIdx]+graph[j][minIdx]);
             }
         }
 
-        System.out.println(dist[b]);
+        if(dist[b] == 100000000) {
+            System.out.println(-1); // 경로 없음
+        } else {
+            System.out.println(dist[b]);
+        }
     }
 }
