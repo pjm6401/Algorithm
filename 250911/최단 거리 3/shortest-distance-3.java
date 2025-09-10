@@ -9,8 +9,13 @@ public class Main {
             int u = sc.nextInt();
             int v = sc.nextInt();
             int w = sc.nextInt();
-            graph[u][v] = w;
-            graph[v][u] = w;
+            if (graph[u][v] == 0) {
+                graph[u][v] = w;
+                graph[v][u] = w;
+            } else {
+                graph[u][v] = Math.min(graph[u][v], w);
+                graph[v][u] = Math.min(graph[v][u], w);
+            }
         }
         int a = sc.nextInt();
         int b = sc.nextInt();
