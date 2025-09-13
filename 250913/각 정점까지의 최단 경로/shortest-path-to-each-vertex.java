@@ -47,7 +47,7 @@ public class Main {
             }
         }
         for(int i = 1; i<=n; i++){
-            
+            if(dist[i] ==100000001 ) dist[i]= -1;
             System.out.println(dist[i]);
         }
     }
