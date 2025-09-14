@@ -112,7 +112,7 @@ public class Main {
             long currentTime = currentPath.time;
 
             // 이미 더 좋은 경로를 찾았다면 무시
-            if (currentCost > dist[u].cost || (currentCost == dist[u].cost && currentTime > dist[u].time)) {
+            if (currentCost != dist[u].cost || (currentCost == dist[u].cost && currentTime != dist[u].time)) {
                 continue;
             }
 
