@@ -7,10 +7,10 @@ public class Main {
         for (int i = 0; i < n; i++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
-            if(map.containsKey(x) && map.get(x) > y){
-                map.put(x,y);
-            }else if (!map.containsKey(x)){
-                map.put(x,y);
+            if (!map.containsKey(x)) {
+                map.put(x, y);
+            } else {
+                map.put(x, Math.min(map.get(x), y));
             }
         }
         
