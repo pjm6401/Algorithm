@@ -10,7 +10,13 @@ public class Main {
         int[] arr = new int[n];
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            map.put(arr[i],i+1);
+            if(!map.containsKey(arr[i])){
+                map.put(arr[i],1);
+            }else{
+                int value = map.get(arr[i]) +1;
+                map.put(arr[i],value);
+            }
+            
         }
         int[] queries = new int[m];
         for (int i = 0; i < m; i++) {
