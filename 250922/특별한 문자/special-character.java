@@ -11,7 +11,7 @@ public class Main {
 
             if(!map.containsKey(a) && !flag[a-97]){
                 map.put(a,i);
-                flag[i] = true;
+                flag[a-97] = true;
             }else{
                 map.remove(a);
             }
@@ -20,7 +20,6 @@ public class Main {
         int [] ans = {-1};
         int [] min = {Integer.MAX_VALUE};
         map.forEach((key,value)->{
-           
             if(min[0]>value){
                 ans[0] = value;
                 min[0] = value;
