@@ -19,8 +19,9 @@ public class Main {
 
         while(it.hasNext()){
             Entry<String,Integer> entry = it.next();
-            BigDecimal bd = new BigDecimal(Double.toString(entry.getValue()*100/n)); 
-            BigDecimal roundedBd = bd.setScale(4, RoundingMode.HALF_UP); // 소수점 둘째 자리까지 반올림
+            double ratio = (double) entry.getValue() * 100.0 / n; // <-- 실수 나눗셈
+            BigDecimal bd = BigDecimal.valueOf(ratio);
+            BigDecimal roundedBd = bd.setScale(4, RoundingMode.HALF_UP);
             System.out.println(entry.getKey() +" "+roundedBd );
         }
     }
