@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.Map.*;
+import java.math.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -18,8 +19,9 @@ public class Main {
 
         while(it.hasNext()){
             Entry<String,Integer> entry = it.next();
-
-            System.out.println(entry.getKey() +" "+Math.round(entry.getValue()/n,4) );
+            BigDecimal bd = new BigDecimal(Double.toString(entry.getValue()*100/n)); 
+            BigDecimal roundedBd = bd.setScale(4, RoundingMode.HALF_UP); // 소수점 둘째 자리까지 반올림
+            System.out.println(entry.getKey() +" "+roundedBd );
         }
     }
 }
