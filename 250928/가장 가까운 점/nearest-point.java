@@ -39,7 +39,13 @@ class Pair implements Comparable<Pair>{
 
     @Override
     public int compareTo(Pair p){
-        
+        if(this.sum == p.sum){
+
+            if(this.x == p.x){
+                return this.y - p.y;
+            }
+            return this.x - p.x;
+        }
         return this.sum - p.sum;
     }
 }
