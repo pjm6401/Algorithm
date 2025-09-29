@@ -16,12 +16,9 @@ public class Main {
             max = Math.max(max,points[i]);
         }
         int cnt = 0;
-        for(int i = min; i<= max; i++){
-            if(set.contains(i)){
-                cnt++;   
-            }
-
-            map.put(i,cnt);
+        for(Integer num : set){
+            cnt++;  
+            map.put(num,cnt);
         }
 
         int[][] queries = new int[Q][2];
