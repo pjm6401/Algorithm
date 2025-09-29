@@ -13,8 +13,8 @@ public class Main {
             int y = -pq.poll();
 
             int minus = Math.abs(x-y);
-
-            pq.add(-minus);
+            if(minus != 0) pq.add(-minus);
+            
         }
 
         if(pq.isEmpty()){
