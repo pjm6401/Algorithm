@@ -1,59 +1,61 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Scanner;
+import java.util.TreeSet;
+import java.util.HashMap;
+
+class Pair {
+    int a, b;
+    public Pair(int a, int b) { 
+        this.a = a; 
+        this.b = b; 
+    }
+}
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        // 1. 빠른 입력을 위해 BufferedReader 사용
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+    public static final int MAX_NUM = 100000;
+    
+    // 변수 선언
+    public static int n, q;
+    public static int[] arr = new int[MAX_NUM];
+    public static Pair[] queries = new Pair[MAX_NUM];
+    
+    public static TreeSet<Integer> nums = new TreeSet<>();
+    public static HashMap<Integer, Integer> mapper = new HashMap<>();
 
-        int N = Integer.parseInt(st.nextToken());
-        int Q = Integer.parseInt(st.nextToken());
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // 입력:
+        n = sc.nextInt();
+        q = sc.nextInt();
 
-        // 2. HashSet을 사용하여 중복 좌표를 효율적으로 제거
-        Set<Integer> pointSet = new HashSet<>();
-        st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            pointSet.add(Integer.parseInt(st.nextToken()));
+        for(int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+        
+        for(int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            queries[i] = new Pair(a, b);
         }
 
-        // 3. 정렬을 위해 ArrayList로 변환 후 정렬
-        List<Integer> uniqueSortedPoints = new ArrayList<>(pointSet);
-        Collections.sort(uniqueSortedPoints);
-
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < Q; i++) {
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-
-            // 4. 이분 탐색(upperBound)을 이용해 범위 내 원소 개수 계산
-            int countB = upperBound(uniqueSortedPoints, b);
-            int countA = upperBound(uniqueSortedPoints, a - 1);
-
-            sb.append(countB - countA).append("\n");
+        for(int i = 0; i < n; i++)
+            nums.add(arr[i]);
+        
+        nums.add((int)(1e9 + 1));
+        
+        int cnt = 1;
+        for(Integer num : nums) {
+            mapper.put(num, cnt);
+            cnt++;
         }
-        System.out.print(sb);
-    }
+        
 
-    /**
-     * list에서 target 값보다 큰 첫 번째 원소의 인덱스를 반환합니다.
-     * 이 인덱스는 list에서 target 값보다 작거나 같은 원소의 개수와 같습니다.
-     */
-    private static int upperBound(List<Integer> list, int target) {
-        int left = 0;
-        int right = list.size(); // 탐색 범위를 list.size()까지 포함
+        for(int i = 0; i < q; i++) {
+            int a = queries[i].a;
+            int b = queries[i].b;
 
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (list.get(mid) <= target) {
-                left = mid + 1;
-            } else {
-                right = mid;
-            }
+            int newA = mapper.get(nums.ceiling(a));
+            int newB = mapper.get(nums.higher(b));
+
+            System.out.println(newB - newA);
         }
-        return left; // left(또는 right)가 결과 인덱스
     }
 }
