@@ -13,7 +13,7 @@ public class Main {
         }
 
         Collections.sort(list);
-        HashMap <Integer,Integer> map = new HashMap<>();
+        HashSet <Integer> set = new HashSet<>();
         int result = 0;
         int start = 0;
         for(int i = 0; i<list.size(); i++){
@@ -22,13 +22,13 @@ public class Main {
             int idx = list.get(i).idx;
             if(v==1){
                 //구간의 시작
-                if(map.isEmpty()){
+                if(set.isEmpty()){
                     start = x;
                 }
-                map.put(idx,x);
+                set.add(idx);
             }else{
-                map.remove(idx);
-                if(map.isEmpty()){
+                set.remove(idx);
+                if(set.isEmpty()){
                     result += Math.abs(x - start);
                 }
             }
