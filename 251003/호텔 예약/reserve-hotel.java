@@ -55,7 +55,7 @@ class Room implements Comparable<Room>{
     @Override
     public int compareTo(Room r ){
         if(this.d == r.d){
-            return r.d - this.d;
+            return r.v - this.v;
         }
 
         return this.d - r.d;
