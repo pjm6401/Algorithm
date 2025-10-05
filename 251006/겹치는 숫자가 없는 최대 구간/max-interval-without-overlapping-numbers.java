@@ -13,12 +13,12 @@ public class Main {
         for (int i = 0; i<n; i++) {
             visit[arr[i]] ++;
 
-            while(j+1<n && visit[arr[j+1]] != 1){
+            while(j+1<n && visit[arr[j+1]] < 1){
                 visit[arr[j+1]] ++;
                 j++;
             }
 
-            ans = Math.max(ans,j-i);
+            ans = Math.max(ans,j-i+1);
             
             visit[arr[i]] --;
         }
