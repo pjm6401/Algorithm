@@ -15,6 +15,8 @@ public class Main {
                 ans = Math.max(ans,arr[i]);
             }
         }
+
+        if(ans == 0 ) ans = -1;
         System.out.println(ans);
     }
 }
