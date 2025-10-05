@@ -15,7 +15,7 @@ public class Main {
                 R[i] = R[i+1];
             }
         }
-        int ans = 0;
+        long ans = 0;
 
         for(int i =0; i<str.length-2; i++){
             if(str[i] == '(' && str[i] == str[i+1]){
