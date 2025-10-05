@@ -9,8 +9,11 @@ public class Main {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        for(int i = 0; i < n-k; i++){
-            for(int j = i+1; j<=i+k; j++){
+        for(int i = 0; i < n-1; i++){
+
+            int limit = i+k;
+            limit = Math.min(limit, n-1);
+            for(int j = i+1; j<=limit; j++){
                 if(arr[i] == arr[j])
                 ans = Math.max(ans,arr[i]);
             }
