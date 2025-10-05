@@ -1,26 +1,24 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] arr = new int[n];
-        int[] visit = new int[100000];
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+        boolean[] visit = new boolean[100001]; // boolean이 더 적합
+
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+
         int j = 0;
         int ans = 0;
-        for (int i = 0; i<n; i++) {
-            visit[arr[i]] ++;
 
-            while(j+1<n && visit[arr[j+1]] < 1){
-                visit[arr[j+1]] ++;
+        for (int i = 0; i < n; i++) {
+            while (j < n && !visit[arr[j]]) {
+                visit[arr[j]] = true;
                 j++;
             }
-
-            ans = Math.max(ans,j-i+1);
-            
-            visit[arr[i]] --;
+            ans = Math.max(ans, j - i);
+            visit[arr[i]] = false;
         }
 
         System.out.println(ans);
