@@ -12,7 +12,6 @@ public class Main {
         int ans = 0;
         
         for(int i = 0; i < arr.length; i++){
-            // ✅ 조건 변경: size() <= k
             while(j < arr.length && count.size() <= k){
                 char c = arr[j];
 
