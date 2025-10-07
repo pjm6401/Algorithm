@@ -19,11 +19,11 @@ public class Main {
             Integer max = set.ceiling(fires[i]);
 
             if(min == null && max != null){
-                ans = Math.max(ans, Math.abs(Math.abs(fires[i]) - Math.abs(min)));
+                ans = Math.max(ans, Math.abs(Math.abs(fires[i]) - Math.abs(max)));
             }else if(min != null && max == null){
                 ans = Math.max(ans, Math.abs(Math.abs(min) - Math.abs(fires[i])));
             }else if(min != null && max != null){
-                int temp = Math.min(Math.abs(Math.abs(fires[i]) - Math.abs(min)),Math.abs(Math.abs(min) - Math.abs(fires[i])));
+                int temp = Math.min(Math.abs(Math.abs(fires[i]) - Math.abs(min)),Math.abs(Math.abs(max) - Math.abs(fires[i])));
                 ans = Math.max(ans,temp);
             }
         }
