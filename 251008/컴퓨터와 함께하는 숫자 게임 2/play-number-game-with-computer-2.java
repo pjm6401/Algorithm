@@ -16,9 +16,8 @@ public class Main {
 
             while(left<=right){
                 long mid = (left+right)/2;
-                
+                cnt ++;
                 if(mid == x){
-                    cnt++;
                     break;
                 }
 
@@ -27,7 +26,7 @@ public class Main {
                 }else{
                     left = mid + 1;
                 }
-                cnt ++;
+                
             }
             min = Math.min(min,cnt);
             max = Math.max(max,cnt);
