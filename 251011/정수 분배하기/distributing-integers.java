@@ -11,17 +11,17 @@ public class Main {
         }
 
         int left = 1;
-        int rigth = 100000;
+        int right = 100000;
         int max =0;
-        while(left<=rigth){
-            int mid = (left+rigth)/2;
+        while(left<=right){
+            int mid = (left+right)/2;
 
-            if(calc(arr,mid,m) > 0){
+            if(calc(arr,mid,m) >= m){
                 
                 left = mid+1;
                 max = Math.max(max,mid);
             }else{
-                rigth = mid - 1;
+                right = mid - 1;
             }
         }
         System.out.println(max);
@@ -31,11 +31,11 @@ public class Main {
         int count = 0;
 
         for (int i = 0; i < arr.length; i++) {
-            if(arr[i]/n == 0) return 0;
-            count += arr[i]/n;
+            if (arr[i] >= n) {
+    count += arr[i] / n;
+}
         }
 
-        if(count<m) return 0;
 
         return count;
     }
