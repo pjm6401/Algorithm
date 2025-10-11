@@ -5,12 +5,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         long s = sc.nextLong();
         long left = 1;
-        long right = Long.MAX_VALUE;
+        long right = (long)Math.sqrt(2 * (double)s) + 2; // 상한 제한
         long min = 0;
         while(left<=right){
-            long mid = (left+left)/2;
+            long mid = (left+right)/2;
 
-            if(mid * (mid+1) / 2 <= s){
+            if (mid <= (2 * s) / (mid + 1)) {
                 left = mid +1;
                 min = Math.max(min,mid);
             }else{
