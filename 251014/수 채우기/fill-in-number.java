@@ -6,7 +6,7 @@ public class Main {
 
         int limit = n/2;
         int min = Integer.MAX_VALUE;
-        for(int i = 1; i<=limit; i++){
+        for(int i = 0; i<=limit; i++){
             int last = n - (2*i);
 
             int cnt = last/5;
