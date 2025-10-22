@@ -23,16 +23,17 @@ public class Main {
 
             max = Math.max(max, sPair.num + ePair.num);
 
-            if (startIdx + sPair.count == lastIdx + ePair.count) {
-                startIdx += sPair.count;
+            if (startIdx + sPair.count > lastIdx + ePair.count) {
                 lastIdx += ePair.count;
-                start++;
                 last--;
             } else if (startIdx + sPair.count < lastIdx + ePair.count) {
                 startIdx += sPair.count;
                 start++;
             } else {
+                
+                startIdx += sPair.count;
                 lastIdx += ePair.count;
+                start++;
                 last--;
             }
         }
