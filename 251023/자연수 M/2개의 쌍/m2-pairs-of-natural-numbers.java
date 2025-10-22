@@ -16,33 +16,25 @@ public class Main {
         int last = list.size()-1;
         int startIdx = 0;
         int lastIdx = 0;
-        boolean flag = true;
-        
-        while(flag){
+
+        while (start <= last) {
             Pair sPair = list.get(start);
             Pair ePair = list.get(last);
-            
-            if(start>=list.size()/2 || last<list.size()/2) break;
 
-            if(sPair.num+ePair.num >=max){
-                max = sPair.num+ePair.num;
-            }else{
-                break;
-            }
+            max = Math.max(max, sPair.num + ePair.num);
 
-
-            if(startIdx+sPair.count>lastIdx+ePair.count){
-                last--;
-                lastIdx+=ePair.count;
-            }else if(startIdx+sPair.count<lastIdx+ePair.count){
-                start++;
-                startIdx+=sPair.count;
-            }else{
+            if (startIdx + sPair.count == lastIdx + ePair.count) {
+                startIdx += sPair.count;
+                lastIdx += ePair.count;
                 start++;
                 last--;
+            } else if (startIdx + sPair.count < lastIdx + ePair.count) {
+                startIdx += sPair.count;
+                start++;
+            } else {
+                lastIdx += ePair.count;
+                last--;
             }
-
-
         }
 
         System.out.println(max);
