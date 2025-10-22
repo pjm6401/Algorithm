@@ -16,7 +16,11 @@ public class Main {
         long max = 0;
 
         for(int i = 0 ; i<list.size()/2; i++){
-            max = Math.max(max, list.get(i) + list.get(list.size()-1-i));
+            if(max <= list.get(i) + list.get(list.size()-1-i)){
+                max = list.get(i) + list.get(list.size()-1-i);
+            }else{
+                break;
+            }
         }
 
         System.out.println(max);
