@@ -22,7 +22,6 @@ public class Main {
             }
         }
         int start = -1;
-        int end = -1;
         int cnt = 0;
         while(!pq.isEmpty()){
             start = pq.poll();
