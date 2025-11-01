@@ -1,36 +1,25 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int[] arr = new int[n];
+
         TreeSet<Integer> set = new TreeSet<>();
         for (int i = 0; i < n; i++) {
             set.add(sc.nextInt());
         }
 
-        int min = Integer.MAX_VALUE;
+        int minDiff = Integer.MAX_VALUE;
 
-        while(true){
-            int start = set.first();
-            int last = set.last();
-
-            if(last - start<m) break;
-
-            min = Math.min(min, last - start);
-
-            if(set.lower(last) - start > last - set.higher(start)){
-                set.remove(last);
-            }else{
-                set.remove(start);
+        for (int a : set) {
+            Integer b = set.ceiling(a + m); // a+m 이상 중 가장 작은 값
+            if (b != null) {
+                minDiff = Math.min(minDiff, b - a);
             }
         }
 
-        if(min == Integer.MAX_VALUE){
-            System.out.println(-1);
-        }else{
-            System.out.println(min);
-        }
+        System.out.println(minDiff == Integer.MAX_VALUE ? -1 : minDiff);
     }
 }
