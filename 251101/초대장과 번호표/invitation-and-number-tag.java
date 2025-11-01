@@ -6,7 +6,7 @@ public class Main {
         int N = sc.nextInt();
         int G = sc.nextInt();
 
-        // 그룹 구성 저장
+        // 그룹 정보
         List<List<Integer>> groups = new ArrayList<>();
         for (int i = 0; i < G; i++) {
             int k = sc.nextInt();
@@ -17,39 +17,37 @@ public class Main {
             groups.add(members);
         }
 
-        // 각 사람이 어떤 그룹에 속해있는지도 저장
+        // 각 사람이 어떤 그룹에 속해있는지
         List<List<Integer>> personGroups = new ArrayList<>();
         for (int i = 0; i <= N; i++) personGroups.add(new ArrayList<>());
-
         for (int i = 0; i < G; i++) {
             for (int p : groups.get(i)) {
-                personGroups.get(p).add(i); // 사람 p는 i번 그룹에 속함
+                personGroups.get(p).add(i);
             }
         }
 
-        // BFS
+        // 초대 관리
         boolean[] invited = new boolean[N + 1];
-        Queue<Integer> q = new LinkedList<>();
+        boolean[] visitedGroup = new boolean[G];
+        int[] invitedCount = new int[G];  // 각 그룹의 초대된 사람 수
 
+        Queue<Integer> q = new LinkedList<>();
         invited[1] = true;
         q.add(1);
 
         while (!q.isEmpty()) {
             int person = q.poll();
 
-            // 이 사람이 속한 모든 그룹 탐색
             for (int groupIdx : personGroups.get(person)) {
-                List<Integer> members = groups.get(groupIdx);
+                if (visitedGroup[groupIdx]) continue;
 
-                // 이 그룹의 구성원 중 초대된 사람 수 확인
-                int invitedCount = 0;
-                for (int m : members) {
-                    if (invited[m]) invitedCount++;
-                }
+                invitedCount[groupIdx]++;
 
-                // 만약 그룹의 (k-1)명이 초대됐다면 나머지도 모두 초대
-                if (invitedCount >= members.size() - 1) {
-                    for (int m : members) {
+                // 그룹 내 초대된 사람 수가 (k - 1) 이상이면 그룹 전체 초대
+                if (invitedCount[groupIdx] == groups.get(groupIdx).size() - 1) {
+                    visitedGroup[groupIdx] = true;
+
+                    for (int m : groups.get(groupIdx)) {
                         if (!invited[m]) {
                             invited[m] = true;
                             q.add(m);
