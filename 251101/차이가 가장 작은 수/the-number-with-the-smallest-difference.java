@@ -21,9 +21,9 @@ public class Main {
             min = Math.min(min, last - start);
 
             if(last - set.lower(last) > set.higher(start) - start){
-                set.remove(start);
-            }else if(last - set.lower(last) < set.higher(start) - start){
                 set.remove(last);
+            }else if(last - set.lower(last) < set.higher(start) - start){
+                set.remove(start);
             }else{
                 set.remove(start);
                 set.remove(last);
