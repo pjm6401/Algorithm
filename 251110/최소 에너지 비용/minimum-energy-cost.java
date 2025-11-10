@@ -18,7 +18,7 @@ public class Main {
         chargeMin[0] = charge[0];
 
         for(int i = 1; i<n; i++){
-            chargeMin[i] = Math.min(charge[i],charge[i-1]);
+            chargeMin[i] = Math.min(charge[i],chargeMin[i-1]);
         }
 
         for(int i = 0; i<n-1; i++){
