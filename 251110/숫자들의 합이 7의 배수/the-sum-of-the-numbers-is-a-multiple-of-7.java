@@ -14,17 +14,17 @@ public class Main {
         Arrays.fill(first, -1);
         first[0] = 0;
 
-        int sum = 0;
+        long sum = 0; // long으로 변경
         int ans = 0;
 
         for (int i = 1; i <= n; i++) {
             sum += nums[i - 1];
-            int mod = sum % 7;
+            int mod = (int)(sum % 7);
 
             if (first[mod] == -1) {
-                first[mod] = i; // 처음 등장
+                first[mod] = i;
             } else {
-                ans = Math.max(ans, i - first[mod]); // 최대 길이 갱신
+                ans = Math.max(ans, i - first[mod]);
             }
         }
 
