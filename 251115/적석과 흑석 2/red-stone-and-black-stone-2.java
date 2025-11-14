@@ -21,7 +21,6 @@ public class Main {
             list.add(new Pair(s, e));
         }
 
-        // 🔥 끝점 기준 오름차순 정렬
         Collections.sort(list);
 
         int cnt = 0;
@@ -52,7 +51,7 @@ class Pair implements Comparable<Pair> {
 
     @Override
     public int compareTo(Pair p) {
-        if (this.e != p.e) return this.e - p.e;  // 끝점 기준
-        return this.s - p.s;                     // 보조로 시작점
+        if (this.e == p.e) return this.s - p.s;  // 끝점 기준
+        return this.e - p.e;                     // 보조로 시작점
     }
 }
